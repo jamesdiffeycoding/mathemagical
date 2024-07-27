@@ -120,22 +120,6 @@ test('division', async ({ page }) => {
   let history = await page.textContent('#history')
   expect(history).toBe('42 ÷ 2 - 1.3')
   await page.click('#Clear'); // clear page
-  // Case: simple division test with multiple decimals and negative output
-  await page.click('button:has-text("4")');
-  await page.click('button:has-text("2")');
-  await page.click('button:has-text("÷")');
-  await page.click('button:has-text("2")');
-  await page.click('button:has-text("-")');
-  await page.click('button:has-text("1")');
-  await page.click('button:has-text(".")');
-  await page.click('button:has-text(".")');
-  await page.click('button:has-text("3")');
-  await page.click('button:has-text("=")');
-  text = await page.textContent('#output');
-  expect(text).toBe('19.7');
-  history = await page.textContent('#history')
-  expect(history).toBe('42 ÷ 2 - 1.3')
-  await page.click('#Clear'); // clear page
   // Case: complicated division test
   await page.click('button:has-text("4")');
   await page.click('button:has-text("2")');
@@ -195,7 +179,6 @@ test('duplicate decimal places', async ({ page }) => {
   await page.click('button:has-text("2")');
   await page.click('button:has-text(".")');
   await page.click('button:has-text("5")');
-
   await page.click('button:has-text("=")');
   text = await page.textContent('#output');
   expect(text).toBe('1.25');
@@ -275,7 +258,7 @@ test('"=" -> new operation does not recent output to 0', async ({ page }) => {
   expect(history).toBe('3 + 4 + 5')
 })
 
-test('"Ans" is working as expected', async ({ page }) => {
+test('"Ans"', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   // Case: 3 + 4 - Ans = "0"
   await page.click('button:has-text("3")');
