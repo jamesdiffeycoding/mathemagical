@@ -7,7 +7,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest"
+    "test": "vitest",
+    "pr": "playwright test",
+    "prui": "playwright test --ui",
+    "prdb": "playwright test --debug",
+    "prcg": "playwright codegen",
+    "prrp": "playwright show-report"
   },
   "dependencies": {
     "decimal.js": "^10.4.3",
@@ -16,6 +21,7 @@
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@playwright/test": "^1.45.3",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

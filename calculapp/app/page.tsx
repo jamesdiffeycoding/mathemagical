@@ -65,11 +65,14 @@ export default function Home() {
   }
   function handlePercentage() {
     if (output.length >= 0 && variable === "") {
-      const outputDecimal = new Decimal(ensureDecimal(output))
-      setOutput(prev => outputDecimal.dividedBy("100").toString())
+      const outputDecimal = new Decimal(ensureDecimal(output)).dividedBy("100").toString()
+      setOutput(prev => outputDecimal)
     } else {
-      const variableDecimal = new Decimal(ensureDecimal(variable))
-      setVariable(prev => variableDecimal.dividedBy("100").toString());
+      const variableDecimal = new Decimal(ensureDecimal(variable)).dividedBy("100").toString()
+      if (variableDecimal.indexOf(".") !== -1) {
+        setVariableIsDecimal(prev => true)
+      }
+      setVariable(prev => variableDecimal);
     }
   }
   function handleOperation(input: string) {
@@ -135,14 +138,18 @@ export default function Home() {
       <section className={`w-5/6 max-w-[800px] ${outerBorderColor} ${backgroundColourPrimary} border-4 ${outerBorderRounding} text-[25px] font-bold`}>
         <section className={`${backgroundColourPrimary} ${textColourPrimary} ${innerBorderRounding} min-h-[80px] flex flex-col justify-between rounded-b-none w-full text-center p-4`}>
           {/* CALCULATION */}
-          <section className="text-xs">{history}
+          <section className="text-xs">
+            <span id="history">
+              {history}
+            </span>
           </section>
-          <p>decimal? {variableIsDecimal ? "true" : "false"}</p>
-          <p>variable: {variable}</p>
-          <p>output: {output}</p>
-          <p>operation: {operation}</p>
+          <title>Calculapp</title>
+          <h1>Calculapp</h1>
           {/* OUTPUT */}
-          <section className="text-[40px]">{output}
+          <section className="text-[40px]">
+            <span id="output">
+              {output}
+            </span>
             <span className="text-indigo-700">
               {" "}{operation} {variable}
             </span>
@@ -152,29 +159,29 @@ export default function Home() {
         <section className={`${backgroundColourSecondary} ${buttonsTopBorder} ${textColourSecondary} ${innerBorderRounding} ${buttonsHeight} grid grid-cols-4`}>
           {/* TOP ROW */}
           <section className={`${textColourTertiary} col-span-4 grid grid-cols-4`}>
-            <button className={`${hoverColour}`} onClick={() => handleClear()}>Clear</button>
-            <button className={`${hoverColour}`} onClick={() => handleOperation(event.target.textContent)}>÷</button>
-            <button className={`${hoverColour}`} onClick={() => handleOperation(event.target.textContent)}>×</button>
-            <button className={`${hoverColour}`} onClick={() => clearVariable()}>ce</button>
+            <button id="Clear" className={`${hoverColour}`} onClick={() => handleClear()}>Clear</button>
+            <button id="÷" className={`${hoverColour}`} onClick={() => handleOperation(event.target.textContent)}>÷</button>
+            <button id="×" className={`${hoverColour}`} onClick={() => handleOperation(event.target.textContent)}>×</button>
+            <button id="ce" className={`${hoverColour}`} onClick={() => clearVariable()}>ce</button>
           </section>
-          <button className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>7</button>
-          <button className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>8</button>
-          <button className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>9</button>
-          <button className={`${hoverColour} ${textColourTertiary} `} onClick={() => handleOperation(event.target.textContent)}>-</button>
-          <button className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>4</button>
-          <button className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>5</button>
-          <button className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>6</button>
-          <button className={`${hoverColour} ${textColourTertiary}`} onClick={() => handleOperation(event.target.textContent)}>+</button>
-          <button className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>1</button>
-          <button className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>2</button>
-          <button className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>3</button>
-          {/* EQUALS */}
+          <button id="7" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>7</button>
+          <button id="8" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>8</button>
+          <button id="9" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>9</button>
+          <button id="-" className={`${hoverColour} ${textColourTertiary} `} onClick={() => handleOperation(event.target.textContent)}>-</button>
+          <button id="4" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>4</button>
+          <button id="5" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>5</button>
+          <button id="6" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>6</button>
+          <button id="+" className={`${hoverColour} ${textColourTertiary}`} onClick={() => handleOperation(event.target.textContent)}>+</button>
+          <button id="1" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>1</button>
+          <button id="2" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>2</button>
+          <button id="3" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>3</button>
+          {/* EQUAid LS */}
           <div className={`${backgroundColourPrimary} ${textColourPrimary} ${equalsBorder} row-span-2 flex align-middle`}>
-            <button className="text-center w-full" onClick={() => handleEquals()}>=</button>
+            <button id="=" className="text-center w-full" onClick={() => handleEquals()}>=</button>
           </div>
-          <button className={`${hoverColour}`} onClick={() => handlePercentage()}>%</button>
-          <button className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>0</button>
-          <button className={`${hoverColour}`} onClick={() => handleDecimal()}>.</button>
+          <button id="%" className={`${hoverColour}`} onClick={() => handlePercentage()}>%</button>
+          <button id="0" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>0</button>
+          <button id="." className={`${hoverColour}`} onClick={() => handleDecimal()}>.</button>
         </section>
       </section>
     </main >
