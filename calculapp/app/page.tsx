@@ -6,19 +6,18 @@ import Decimal from "decimal.js" // Decimal JS prevents JavaScript rounding erro
 export default function Home() {
 
   // STYLES CONSTANTS
-  const backgroundColourPrimary = "bg-indigo-400"
-  const backgroundColourSecondary = "bg-gray-300"
+  // -- backgrounds
+  const backgroundGrid = "pattern-paper pattern-indigo-500 pattern-bg-white pattern-size-6 pattern-opacity-100"
+  const backgroundColour = "bg-indigo-400"
+  const textColour1 = "text-black"
+  const textColour2 = "text-indigo-600"
+  const textColour3 = "text-indigo-700"
+
+  // -- borders
   const outerBorderColor = "border-indigo-600"
-  const textColourPrimary = "text-black"
-  const textColourSecondary = "text-black"
-  const textColourTertiary = "text-indigo-600"
   const buttonsTopBorder = "border-t-4 border-indigo-500"
-  const outerBorderRounding = "rounded-xl"
-  const innerBorderRounding = "rounded-lg"
   const equalsBorder = "rounded-r-lg rounded-tr-none"
-  const buttonsHeight = "min-h-[400px]"
   const hoverColour = "hover:bg-indigo-300"
-  const backgroundPattern = "pattern-paper pattern-indigo-500 pattern-bg-white pattern-size-6 pattern-opacity-100"
 
   // STATES
   const [output, setOutput] = useState("")
@@ -127,10 +126,10 @@ export default function Home() {
 
 
   return (
-    <main className={`${backgroundPattern} flex min-h-screen flex-col align-middle justify-center items-center`}>
+    <main className={`${backgroundGrid} flex min-h-screen flex-col align-middle justify-center items-center`}>
       {/* ENTIRE CALCULATOR */}
-      <section className={`w-5/6 max-w-[800px] ${outerBorderColor} ${backgroundColourPrimary} border-4 ${outerBorderRounding} text-[25px] font-bold`}>
-        <section className={`${backgroundColourPrimary} ${textColourPrimary} ${innerBorderRounding} min-h-[145px] flex flex-col justify-between rounded-b-none w-full text-center`}>
+      <section className={`w-5/6 max-w-[800px] ${outerBorderColor} ${backgroundColour} border-4 rounded-xl text-[25px] font-bold`}>
+        <section className={`${backgroundColour} ${textColour1} rounded-lg min-h-[145px] flex flex-col justify-between rounded-b-none w-full text-center`}>
           {/* CALCULATION */}
           <title>Calculapp</title>
           <section className="bg-indigo-500 w-full rounded-t-lg">
@@ -155,16 +154,16 @@ export default function Home() {
               <span id="output">
                 {Number(Number(output).toPrecision(14))}
               </span>
-              <span className="text-indigo-700">
+              <span className={`${textColour3}`}>
                 {" "}{operation == "" ? <span className="pl-2"> </span> : operation} {variable}
               </span>
             </section>
           </section>
         </section>
         {/* PARENT GRID: BUTTONS SECTION */}
-        <section className={`${backgroundColourSecondary} ${buttonsTopBorder} ${textColourSecondary} ${innerBorderRounding} ${buttonsHeight} grid grid-cols-4`}>
+        <section className={`bg-gray-300 ${buttonsTopBorder} ${textColour1} rounded-lg min-h-[400px] grid grid-cols-4`}>
           {/* CHILD GRID#1: TOP ROW */}
-          <section className={`${textColourTertiary} col-span-4 grid grid-cols-4`}>
+          <section className={`${textColour2} col-span-4 grid grid-cols-4`}>
             <button id="Clear" className={`${hoverColour}`} onClick={() => handleClear()}>Clear</button>
             <button id="÷" className={`${hoverColour}`} onClick={() => handleOperation(event.target.textContent)}>÷</button>
             <button id="×" className={`${hoverColour}`} onClick={() => handleOperation(event.target.textContent)}>×</button>
@@ -183,14 +182,14 @@ export default function Home() {
             <button id="3" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>3</button>
           </section>
           {/* CHILD GRID#3: RIGHT COL */}
-          <section className={`${textColourTertiary} row-span-3 grid grid-rows-3`}>
-            <button id="-" className={`${hoverColour} ${textColourTertiary} `} onClick={() => handleOperation(event.target.textContent)}>-</button>
-            <button id="+" className={`${hoverColour} ${textColourTertiary}`} onClick={() => handleOperation(event.target.textContent)}>+</button>
-            <button id="Ans" className={`${hoverColour} ${textColourTertiary}`} onClick={() => handleAnswer()}>Ans</button>
+          <section className={`${textColour2} row-span-3 grid grid-rows-3`}>
+            <button id="-" className={`${hoverColour} ${textColour2} `} onClick={() => handleOperation(event.target.textContent)}>-</button>
+            <button id="+" className={`${hoverColour} ${textColour2}`} onClick={() => handleOperation(event.target.textContent)}>+</button>
+            <button id="Ans" className={`${hoverColour} ${textColour2}`} onClick={() => handleAnswer()}>Ans</button>
           </section>
           <button id="0" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>0</button>
-          <button id="." className={`${hoverColour}  ${textColourTertiary}`} onClick={() => handleDecimal()}>.</button>
-          <div className={`${backgroundColourPrimary} ${textColourPrimary} ${equalsBorder} flex col-span-2`}>
+          <button id="." className={`${hoverColour}  ${textColour2}`} onClick={() => handleDecimal()}>.</button>
+          <div className={`${backgroundColour} ${textColour1} ${equalsBorder} flex col-span-2`}>
             <button id="=" className="text-center w-full" onClick={() => handleEquals()}>=</button>
           </div>
         </section>
