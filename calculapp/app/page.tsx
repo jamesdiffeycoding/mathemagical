@@ -1,9 +1,17 @@
 "use client"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { sum, divide, multiply, exponent, subtract, remainder } from '../basicOperations.js'
-import Decimal from "decimal.js"
+import Decimal from "decimal.js" // Decimal JS prevents JavaScript rounding errors (e.g. 3.3+3.3 = 6.59999)
+
+
+// BUGS TO FIX
+// ---- TYPING ".3.3" on first load
+// ---- typing "." after equals
+// --- pressing "=" twice resets everything
+// --- "percentage" - how history is handled
 
 export default function Home() {
+
   // STYLES CONSTANTS
   const backgroundColourPrimary = "bg-indigo-400"
   const backgroundColourSecondary = "bg-gray-300"
@@ -21,56 +29,76 @@ export default function Home() {
 
   // STATES
   const [output, setOutput] = useState("")
-  const [record, setRecord] = useState("")
+  const [history, setHistory] = useState("")
   const [variable, setVariable] = useState("")
   const [operation, setOperation] = useState("")
   const [variableIsDecimal, setVariableIsDecimal] = useState(false)
 
   // FUNCTIONS
   function handleVariable(input: string) {
-    if (operation == "" && variable.length == 0) {
-      handleClear()
-    }
+    if (operation == "" && variable.length == 0) handleClear() // Conditional clear ensures that after pressing "=", typing a new number with no operation will reset space. 
     setVariable(prev => prev += input)
   }
   function clearVariable() {
     setVariable("")
     setVariableIsDecimal(false)
   }
-  function handleDecimal() {
-    if (variableIsDecimal) {
-      return
+  function updateHistory() {
+    if (history === "") { // Conditional ensures first entry doesn't require an operation.
+      setHistory(prev => prev += variable)
+    } else {
+      if (variable.length >= 1) { // Conditional ensures history only appended when variable and operation specified.
+        const addition = ` ${operation} ${variable}`
+        setHistory(prev => prev += addition)
+      }
     }
-    setVariableIsDecimal(true)
-    handleVariable(".")
+  }
+  function handleDecimal() {
+    if (!variableIsDecimal) {
+      setVariableIsDecimal(prev => true)
+      if (variable.length == 0) {
+        setVariable("0.")
+      } else {
+        handleVariable(".")
+      }
+    }
+  }
+  function handlePercentage() {
+    if (output.length >= 0 && variable === "") {
+      const outputDecimal = new Decimal(ensureDecimal(output))
+      setOutput(prev => outputDecimal.dividedBy("100").toString())
+    } else {
+      const variableDecimal = new Decimal(ensureDecimal(variable))
+      setVariable(prev => variableDecimal.dividedBy("100").toString());
+    }
   }
   function handleOperation(input: string) {
+    setOperation(input)
+    updateHistory()
     if (output == "") {
       setOutput(variable)
-      setOperation(input)
-      clearVariable()
     } else {
-      setOperation(input)
       calculateOutput()
-      clearVariable()
     }
+    clearVariable()
   }
   function handleClear() {
     setOutput("")
     setVariable("")
-    setRecord("")
+    setHistory("")
     setOperation("")
     setVariableIsDecimal(false)
   }
   function ensureDecimal(num) {
-    if (num % 1 === 0) {
+    // Conditional below ensures ".0" is appended if not already a decimal. 
+    if (num % 1 === 0 && num.indexOf(".") === -1) {
       return num + '.0';
     } else {
       return num.toString();
     }
   }
-  function calculateOutput() {
 
+  function calculateOutput() {
     const outputDecimal = new Decimal(ensureDecimal(output))
     const variableDecimal = new Decimal(ensureDecimal(variable))
     switch (operation) {
@@ -78,18 +106,20 @@ export default function Home() {
         setOutput(prev => outputDecimal.add(variableDecimal).toString());
         break;
       case "-":
-        setOutput(prev => Number(output) - Number(variable));
+        setOutput(prev => outputDecimal.minus(variableDecimal).toString());
         break;
       case "×":
-        setOutput(prev => Number(output) * Number(variable));
+        setOutput(prev => outputDecimal.times(variableDecimal).toString());
         break;
       case "/":
-        setOutput(prev => Number(output) / Number(variable));
+        setOutput(prev => outputDecimal.dividedBy(variableDecimal).toString());
         break;
       default:
+        setOutput(prev => variable) // Handles case where no operation specified on equals press.
     }
   }
   function handleEquals() {
+    updateHistory()
     calculateOutput()
     setVariable("")
     setOperation("")
@@ -98,26 +128,24 @@ export default function Home() {
 
 
 
+
   return (
     <main className={`${backgroundPattern} flex min-h-screen flex-col align-middle justify-center items-center`}>
       {/* ENTIRE CALCULATOR */}
-      <section className={`w-5/6 min-w-350 max-w-1000 ${outerBorderColor} ${backgroundColourPrimary} border-4 ${outerBorderRounding} text-[25px] font-bold`}>
-        <div className="text-red-500">
-          <p>Type number</p>
-          <p>Press +</p>
-          <p>Type number</p>
-          <p>Press =</p>
-        </div>
-        <div>Variable: {variable}</div>
-        <div>Operation: {operation}</div>
-        <div>Output: {output}</div>
-
-        <section className={`${backgroundColourPrimary} ${textColourPrimary} ${innerBorderRounding} min-h-[80px] flex flex-col justify-between rounded-b-none w-full text-right p-4`}>
+      <section className={`w-5/6 max-w-[800px] ${outerBorderColor} ${backgroundColourPrimary} border-4 ${outerBorderRounding} text-[25px] font-bold`}>
+        <section className={`${backgroundColourPrimary} ${textColourPrimary} ${innerBorderRounding} min-h-[80px] flex flex-col justify-between rounded-b-none w-full text-center p-4`}>
           {/* CALCULATION */}
-          <section className="text-xs">{record}
+          <section className="text-xs">{history}
           </section>
+          <p>decimal? {variableIsDecimal ? "true" : "false"}</p>
+          <p>variable: {variable}</p>
+          <p>output: {output}</p>
+          <p>operation: {operation}</p>
           {/* OUTPUT */}
-          <section className="text-[40px]">{output == "" ? (variable == "" ? "0" : "") : output} {operation} {variable}
+          <section className="text-[40px]">{output}
+            <span className="text-indigo-700">
+              {" "}{operation} {variable}
+            </span>
           </section>
         </section>
         {/* BUTTONS SECTION */}
@@ -144,7 +172,7 @@ export default function Home() {
           <div className={`${backgroundColourPrimary} ${textColourPrimary} ${equalsBorder} row-span-2 flex align-middle`}>
             <button className="text-center w-full" onClick={() => handleEquals()}>=</button>
           </div>
-          <button className={`${hoverColour}`} onClick={() => handleOperation(event.target.textContent)}>%</button>
+          <button className={`${hoverColour}`} onClick={() => handlePercentage()}>%</button>
           <button className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>0</button>
           <button className={`${hoverColour}`} onClick={() => handleDecimal()}>.</button>
         </section>
