@@ -5,7 +5,7 @@ test('Load page', async ({ page }) => {
 });
 test('Page title', async ({ page }) => {
   await page.goto('http://localhost:3000/');
-  await expect(page).toHaveTitle(/Calculapp/);
+  await expect(page).toHaveTitle(/Calculapp/); // This refers to the page title at the top of the browser
 });
 test('Click buttons', async ({ page }) => {
   await page.goto('http://localhost:3000/');
@@ -21,7 +21,6 @@ test('Click buttons', async ({ page }) => {
   await page.click('button:has-text("Clear")');
   await page.click('button:has-text("+")');
   await page.click('button:has-text("-")');
-  await page.click('button:has-text("%")');
   await page.click('button:has-text(".")');
   await page.click('button:has-text("÷")');
   await page.click('button:has-text("×")');
@@ -29,23 +28,16 @@ test('Click buttons', async ({ page }) => {
   await page.click('button:has-text("ce")');
 });
 
-test('Check basic inputs', async ({ page }) => {
+test('basic inputs', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   // Case: starting with empty output
   let text = await page.textContent('#output');
-  expect(text).toBe('');
+  expect(text).toBe('0');
   let history = await page.textContent('#history')
   expect(history).toBe('')
-  // Case: entering a single number
-  await page.click('button:has-text("1")');
-  await page.click('button:has-text("=")');
-  text = await page.textContent('#output');
-  expect(text).toBe('1');
-  history = await page.textContent('#history')
-  expect(history).toBe('1')
 });
 
-test('Check addition', async ({ page }) => {
+test('addition', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   // Case: addition
   await page.click('button:has-text("4")');
@@ -67,7 +59,7 @@ test('Check addition', async ({ page }) => {
 });
 
 
-test('Check subtraction', async ({ page }) => {
+test('subtraction', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   // Case: minus test with multiple decimals and negative output
   await page.click('button:has-text("4")');
@@ -88,7 +80,7 @@ test('Check subtraction', async ({ page }) => {
   expect(history).toBe('4.2 - 3 - 1.3')
 });
 
-test('Check multiplication', async ({ page }) => {
+test('multiplication', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   // Case: multiplication test with multiple decimals and negative output
   await page.click('button:has-text("4")');
@@ -110,37 +102,13 @@ test('Check multiplication', async ({ page }) => {
 });
 
 
-test('Check division', async ({ page }) => {
+test('division', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   // Case: simple division test with multiple decimals and negative output
   await page.click('button:has-text("4")');
-  await page.click('button:has-text(".")');
   await page.click('button:has-text("2")');
-  await page.click('button:has-text("+")');
   await page.click('button:has-text("÷")');
-  await page.click('button:has-text("3")');
-  await page.click('button:has-text("-")');
-  await page.click('button:has-text("1")');
-  await page.click('button:has-text(".")');
-  await page.click('button:has-text(".")');
-  await page.click('button:has-text("3")');
-  await page.click('button:has-text("=")');
-  let text = await page.textContent('#output');
-  expect(text).toBe('1.7');
-  let history = await page.textContent('#history')
-  expect(history).toBe('4.2 ÷ 3 - 1.3')
-
-});
-
-test('Check percentage', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
-  // Case: percentage test on first input
-  await page.click('button:has-text("4")');
-  await page.click('button:has-text(".")');
   await page.click('button:has-text("2")');
-  await page.click('button:has-text("%")');
-  await page.click('button:has-text("×")');
-  await page.click('button:has-text("3")');
   await page.click('button:has-text("-")');
   await page.click('button:has-text("1")');
   await page.click('button:has-text(".")');
@@ -148,30 +116,47 @@ test('Check percentage', async ({ page }) => {
   await page.click('button:has-text("3")');
   await page.click('button:has-text("=")');
   let text = await page.textContent('#output');
-  expect(text).toBe('-1.174');
+  expect(text).toBe('19.7');
   let history = await page.textContent('#history')
-  expect(history).toBe('0.042 × 3 - 1.3')
-  // Case: percentage test on second variable, where percentage creates a decimal naturally 
+  expect(history).toBe('42 ÷ 2 - 1.3')
   await page.click('#Clear'); // clear page
+  // Case: simple division test with multiple decimals and negative output
   await page.click('button:has-text("4")');
-  await page.click('button:has-text(".")');
   await page.click('button:has-text("2")');
-  await page.click('button:has-text("%")');
-  await page.click('button:has-text("3")');
+  await page.click('button:has-text("÷")');
+  await page.click('button:has-text("2")');
   await page.click('button:has-text("-")');
   await page.click('button:has-text("1")');
-  await page.click('button:has-text("%")');
+  await page.click('button:has-text(".")');
   await page.click('button:has-text(".")');
   await page.click('button:has-text("3")');
   await page.click('button:has-text("=")');
   text = await page.textContent('#output');
-  expect(text).toBe('0.0293');
+  expect(text).toBe('19.7');
   history = await page.textContent('#history')
-  expect(history).toBe('0.0423 - 0.013')
+  expect(history).toBe('42 ÷ 2 - 1.3')
+  await page.click('#Clear'); // clear page
+  // Case: complicated division test
+  await page.click('button:has-text("4")');
+  await page.click('button:has-text("2")');
+  await page.click('button:has-text("4")');
+  await page.click('button:has-text("2")');
+  await page.click('button:has-text("÷")');
+  await page.click('button:has-text("2")');
+  await page.click('button:has-text("2")');
+  await page.click('button:has-text("1")');
+  await page.click('button:has-text(".")');
+  await page.click('button:has-text("1")');
+  await page.click('button:has-text("÷")');
+  await page.click('button:has-text("3")');
+  await page.click('button:has-text("=")');
+  text = await page.textContent('#output');
+  expect(text).toBe('6.3952962460425'); //14 significant specified to it fits in calculator
+  history = await page.textContent('#history')
+  expect(history).toBe('4242 ÷ 221.1 ÷ 3')
 });
 
-
-test('Check duplicate decimal places', async ({ page }) => {
+test('duplicate decimal places', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   let text = await page.textContent('#output');
   // Case: entering a single decimal
@@ -182,31 +167,40 @@ test('Check duplicate decimal places', async ({ page }) => {
   await page.click('button:has-text(".")');
   await page.click('button:has-text("4")');
   await page.click('button:has-text("5")');
+  await page.click('button:has-text("+")');
+  await page.click('button:has-text("1")');
   await page.click('button:has-text("=")');
   text = await page.textContent('#output');
-  expect(text).toBe('123.45');
+  expect(text).toBe('124.45');
   let history = await page.textContent('#history')
-  expect(history).toBe('123.45')
+  expect(history).toBe('123.45 + 1')
   // Case: entering a decimal with no zero
   await page.click('#Clear'); // clear page
   await page.click('button:has-text(".")');
   await page.click('button:has-text("6")');
+  await page.click('button:has-text("+")');
+  await page.click('button:has-text("1")');
   await page.click('button:has-text("=")');
   text = await page.textContent('#output');
-  expect(text).toBe('0.6');
+  expect(text).toBe('1.6');
   history = await page.textContent('#history')
-  expect(history).toBe('0.6')
+  expect(history).toBe('0.6 + 1')
   // Case: entering a number instantly with three decimal places
   await page.click('#Clear'); // clear page
   await page.click('button:has-text(".")');
   await page.click('button:has-text(".")');
   await page.click('button:has-text(".")');
   await page.click('button:has-text("5")');
+  await page.click('button:has-text("×")');
+  await page.click('button:has-text("2")');
+  await page.click('button:has-text(".")');
+  await page.click('button:has-text("5")');
+
   await page.click('button:has-text("=")');
   text = await page.textContent('#output');
-  expect(text).toBe('0.5');
+  expect(text).toBe('1.25');
   history = await page.textContent('#history')
-  expect(history).toBe('0.5')
+  expect(history).toBe('0.5 × 2.5')
   await page.click('#Clear'); // clear page
   // Case: entering two decimal places after a calculation
   await page.click('button:has-text("2")');
@@ -227,3 +221,86 @@ test('Check duplicate decimal places', async ({ page }) => {
   expect(history).toBe('2.2 + 0.3 - 1.2')
 });
 
+
+test('double "=" press does not clear output', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+  await page.click('button:has-text("3")');
+  await page.click('button:has-text("+")');
+  await page.click('button:has-text("4")');
+  await page.click('button:has-text("=")');
+  await page.click('button:has-text("=")');
+  let text = await page.textContent('#output');
+  expect(text).toBe('7');
+  let history = await page.textContent('#history')
+  expect(history).toBe('3 + 4')
+})
+
+test('"=" -> ".", "Ans" or a number clears output', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+  // Case: = followed by "."
+  await page.click('button:has-text("3")');
+  await page.click('button:has-text("+")');
+  await page.click('button:has-text("4")');
+  await page.click('button:has-text("=")');
+  await page.click('button:has-text(".")');
+  let text = await page.textContent('#output');
+  expect(text).toBe('0');
+  let history = await page.textContent('#history')
+  expect(history).toBe('')
+  // Case: = followed by number
+  await page.click('#Clear');
+  await page.click('button:has-text("1")');
+  await page.click('button:has-text("+")');
+  await page.click('button:has-text("2")');
+  await page.click('button:has-text("=")');
+  await page.click('button:has-text("3")');
+  text = await page.textContent('#output');
+  expect(text).toBe('0');
+  history = await page.textContent('#history')
+  expect(history).toBe('')
+})
+
+test('"=" -> new operation does not recent output to 0', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+  await page.click('button:has-text("3")');
+  await page.click('button:has-text("+")');
+  await page.click('button:has-text("4")');
+  await page.click('button:has-text("=")');
+  await page.click('button:has-text("+")');
+  await page.click('button:has-text("5")');
+  await page.click('button:has-text("=")');
+  let text = await page.textContent('#output');
+  expect(text).toBe('12');
+  let history = await page.textContent('#history')
+  expect(history).toBe('3 + 4 + 5')
+})
+
+test('"Ans" is working as expected', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+  // Case: 3 + 4 - Ans = "0"
+  await page.click('button:has-text("3")');
+  await page.click('button:has-text("+")');
+  await page.click('button:has-text("4")');
+  await page.click('button:has-text("-")');
+  await page.click('button:has-text("Ans")');
+  await page.click('button:has-text("=")');
+  let text = await page.textContent('#output');
+  expect(text).toBe('0');
+  let history = await page.textContent('#history')
+  expect(history).toBe('3 + 4 - 7')
+  // Case: 3 + 4 = Ans = "0"
+  await page.click('#Clear');
+  await page.click('button:has-text("3")');
+  await page.click('button:has-text("+")');
+  await page.click('button:has-text("4")');
+  await page.click('button:has-text("=")');
+  await page.click('button:has-text("Ans")');
+  await page.click('button:has-text("=")');
+  text = await page.textContent('#output');
+  expect(text).toBe('0');
+  history = await page.textContent('#history')
+  expect(history).toBe('')
+})
+// FEATURES FOR FUTURE
+// ---- solar power button?
+// ---- bug report button?

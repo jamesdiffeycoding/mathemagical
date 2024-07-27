@@ -23,7 +23,7 @@
     ],
     "paths": {
       "@playwright/test": [
-        "test-fixtures.ts"
+        "./test-fixtures.ts"
       ],
       "@/*": [
         "./*"
