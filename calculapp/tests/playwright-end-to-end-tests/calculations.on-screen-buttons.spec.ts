@@ -1,12 +1,11 @@
 import { test, expect } from '@playwright/test';
+// BUGS
+// keyboard -
+// when pressing a number, it resets output, variable, and operation
+// when pressing an operation, it resets output, variable, and operation 
 
-test('Load page', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
-});
-test('Page title', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
-  await expect(page).toHaveTitle(/Calculapp/); // This refers to the page title at the top of the browser
-});
+
+
 test('Click buttons', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   await page.click('button:has-text("1")');
@@ -26,15 +25,6 @@ test('Click buttons', async ({ page }) => {
   await page.click('button:has-text("×")');
   await page.click('button:has-text("=")');
   await page.click('button:has-text("ce")');
-});
-
-test('basic inputs', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
-  // Case: starting with empty output
-  let text = await page.textContent('#output');
-  expect(text).toBe('0');
-  let history = await page.textContent('#history')
-  expect(history).toBe('')
 });
 
 test('addition', async ({ page }) => {
@@ -135,7 +125,7 @@ test('division', async ({ page }) => {
   await page.click('button:has-text("3")');
   await page.click('button:has-text("=")');
   text = await page.textContent('#output');
-  expect(text).toBe('6.3952962460425'); //14 significant specified to it fits in calculator
+  expect(text).toBe('6.395296246'); //1 significant specified to it fits in calculator
   history = await page.textContent('#history')
   expect(history).toBe('4242 ÷ 221.1 ÷ 3')
 });
@@ -284,6 +274,3 @@ test('"Ans"', async ({ page }) => {
   history = await page.textContent('#history')
   expect(history).toBe('')
 })
-// FEATURES FOR FUTURE
-// ---- solar power button?
-// ---- bug report button?

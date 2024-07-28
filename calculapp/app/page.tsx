@@ -1,10 +1,14 @@
 "use client"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { sum, divide, multiply, exponent, subtract, remainder } from '../basicOperations.js'
 import Decimal from "decimal.js" // Decimal JS prevents JavaScript rounding errors (e.g. 3.3+3.3 = 6.59999)
 
-export default function Home() {
+// FEATURES FOR FUTURE
+// ---- solar power button?
+// ---- bug report button?
 
+
+export default function Home() {
   // STYLES CONSTANTS
   // -- backgrounds
   const backgroundGrid = "pattern-paper pattern-indigo-500 pattern-bg-white pattern-size-6 pattern-opacity-100"
@@ -23,12 +27,101 @@ export default function Home() {
   const [output, setOutput] = useState("")
   const [history, setHistory] = useState("")
   const [variable, setVariable] = useState("")
-  const [operation, setOperation] = useState("")
+  const [operation, setOperation] = useState(" ") /* Keep as " ", see footnotes. */
   const [variableIsDecimal, setVariableIsDecimal] = useState(false)
+
+
+
+  // REFS=================================================================
+  const outputRef = useRef(output);
+  const variableRef = useRef(variable);
+  const operationRef = useRef(operation);
+  const variableIsDecimalRef = useRef(variableIsDecimal)
+  const historyRef = useRef(history)
+
+
+  // Update refs whenever state changes
+  useEffect(() => {
+    outputRef.current = output;
+  }, [output]);
+
+  useEffect(() => {
+    variableRef.current = variable;
+  }, [variable]);
+
+  useEffect(() => {
+    operationRef.current = operation;
+  }, [operation]);
+
+  useEffect(() => {
+    variableIsDecimalRef.current = variableIsDecimal;
+  }, [variableIsDecimal]);
+
+
+  useEffect(() => {
+    historyRef.current = history;
+  }, [history]);
+
+  // KEYDOWN
+  useEffect(() => {
+    function detectKeyDown(e) {
+      let keyPressed = e.key
+      switch (keyPressed) {
+        // Handle numeric keys
+        case '0': case '1': case '2': case '3': case '4':
+        case '5': case '6': case '7': case '8': case '9':
+          handleVariable(keyPressed);
+          break;
+        // Handle decimal point
+        case '.':
+          handleDecimal();
+          break;
+
+        // Handle basic operations
+        case '+': case '-': /* '×' amd '÷' are not keys*/
+          handleOperation(keyPressed);
+          break;
+        // Handle 'hotkey' operations
+        case '/':
+          handleOperation('÷');
+          break;
+        case '*': case 'x':
+          handleOperation('×');
+          break;
+        case '=':
+          handleEquals()
+          break;
+        // Clear variable with 'C' or 'c'
+        case 'c': case 'C':
+          clearVariable();
+          break;
+        // Handle 'Escape' key for clearing
+        case 'Escape':
+          handleClear();
+          break;
+        // Handle 'A' or 'a' for answer
+        case 'a': case 'A':
+          handleAnswer();
+          break;
+        default:
+          // No action for other keys
+          break;
+      }
+
+    }
+    document.addEventListener('keydown', detectKeyDown, true)
+    return () => {
+      document.removeEventListener('keydown', detectKeyDown, true);
+    };
+  }, [])
+
 
   // FUNCTIONS
   function handleVariable(input: string) {
-    if (operation == "" && variable.length == 0) handleClear() // Conditional clear ensures that after pressing "=", typing a new number with no operation will reset space. 
+    if (operationRef.current == "" && variableRef.current.length == 0) {
+      // Conditional clear ensures that after pressing "=", typing a new number with no operation will reset space. 
+      handleClear()
+    }
     setVariable(prev => prev += input)
   }
   function clearVariable() {
@@ -36,23 +129,23 @@ export default function Home() {
     setVariableIsDecimal(false)
   }
   function updateHistory() {
-    if (history === "") { // Conditional ensures first entry doesn't require an operation.
-      setHistory(prev => prev += variable)
+    if (historyRef.current === "") { // Conditional ensures first entry doesn't require an operation.
+      setHistory(prev => prev += variableRef.current)
     } else {
-      if (variable.length >= 1) { // Conditional ensures history only appended when variable and operation specified.
-        const addition = ` ${operation} ${variable}`
+      if (variableRef.current.length >= 1) { // Conditional ensures history only appended when variable and operation specified.
+        const addition = ` ${operationRef.current} ${variableRef.current}`
         setHistory(prev => prev += addition)
       }
     }
   }
   function handleDecimal() {
-    if (operation == "") {
+    if (operationRef.current == "") {
       setOutput("")
       setHistory("")
     }
-    if (!variableIsDecimal) {
+    if (!variableIsDecimalRef.current) {
       setVariableIsDecimal(prev => true)
-      if (variable.length == 0) {
+      if (variableRef.current.length == 0) {
         setVariable("0.")
       } else {
         handleVariable(".")
@@ -60,11 +153,12 @@ export default function Home() {
     }
   }
 
+
   function handleOperation(input: string) {
     setOperation(input)
     updateHistory()
-    if (output == "") {
-      setOutput(variable)
+    if (outputRef.current == "") {
+      setOutput(variableRef.current)
     } else {
       calculateOutput()
     }
@@ -87,9 +181,9 @@ export default function Home() {
   }
 
   function calculateOutput() {
-    const outputDecimal = new Decimal(ensureDecimal(output))
-    const variableDecimal = new Decimal(ensureDecimal(variable))
-    switch (operation) {
+    const outputDecimal = new Decimal(ensureDecimal(outputRef.current))
+    const variableDecimal = new Decimal(ensureDecimal(variableRef.current))
+    switch (operationRef.current) {
       case "+":
         setOutput(prev => outputDecimal.add(variableDecimal).toString());
         break;
@@ -106,7 +200,7 @@ export default function Home() {
     }
   }
   function handleEquals() {
-    if (operation !== "" && variable !== "") {
+    if (operationRef.current !== "" && variableRef.current !== "") {
       updateHistory()
       calculateOutput()
       setVariable("")
@@ -114,14 +208,12 @@ export default function Home() {
     }
   }
   function handleAnswer() {
-    setVariable(output)
-    if (operation == "") {
+    setVariable(outputRef.current)
+    if (operationRef.current == "") {
       setOutput("")
       setHistory("")
     }
   }
-
-
 
 
 
@@ -136,12 +228,15 @@ export default function Home() {
             <h1 className="text-white text-[30px] italic p-1">Calculapp</h1>
           </section>
           {/* DEV USE ONLY DEBUGGING */}
-          {/* <section>
+          <section>
             <div>OUTPUT {output}</div>
             <div>VARIABLE {variable}</div>
+            <div>VARIABLELENGTH {variable.length}</div>
             <div>OPERATION {operation}</div>
+            <div>CONDITION {(operation == "" && variable.length == 0) ? "true" : "false"}</div>
+
             <div></div>
-          </section> */}
+          </section>
 
           <section className="p-2">
             <section className="text-xs">
@@ -152,7 +247,7 @@ export default function Home() {
             {/* OUTPUT */}
             <section className="text-[40px]">
               <span id="output">
-                {Number(Number(output).toPrecision(14))}
+                {Number(Number(output).toPrecision(10))}
               </span>
               <span className={`${textColour3}`}>
                 {" "}{operation == "" ? <span className="pl-2"> </span> : operation} {variable}
@@ -171,15 +266,9 @@ export default function Home() {
           </section>
           {/* CHILD GRID#2: NUMBERS 1-9 */}
           <section className="col-span-3 row-span-3 grid grid-cols-3 grid-rows-3">
-            <button id="7" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>7</button>
-            <button id="8" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>8</button>
-            <button id="9" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>9</button>
-            <button id="4" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>4</button>
-            <button id="5" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>5</button>
-            <button id="6" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>6</button>
-            <button id="1" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>1</button>
-            <button id="2" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>2</button>
-            <button id="3" className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>3</button>
+            {["7", "8", "9", "4", "5", "6", "1", "2", "3"].map((num) => (
+              <button key={num} id={num} className={`${hoverColour}`} onClick={() => handleVariable(event.target.textContent)}>{num}</button>
+            ))}
           </section>
           {/* CHILD GRID#3: RIGHT COL */}
           <section className={`${textColour2} row-span-3 grid grid-rows-3`}>
@@ -197,3 +286,10 @@ export default function Home() {
     </main >
   );
 }
+
+// FOOTNOTES
+// Button presses on-screen can work differently to keyboard presses. It seems to me that
+// --- when a keyboard button is pressed and a function is assigned to it (e.g. handleVariable)
+// --- if that function has any state-related conditions in it then it will not work properly.
+// --- When the function is called, the state used for conditionals will be that of when the function
+// --- was initially assigned to the button press. 
