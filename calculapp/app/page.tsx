@@ -13,6 +13,7 @@ export default function Home() {
   // -- backgrounds
   const backgroundGrid = "pattern-paper pattern-indigo-500 pattern-bg-white pattern-size-6 pattern-opacity-100"
   const backgroundColour = "bg-indigo-400"
+  const backgroundColourDarker = "bg-indigo-500"
   const textColour1 = "text-black"
   const textColour2 = "text-indigo-600"
   const textColour3 = "text-indigo-700"
@@ -224,7 +225,7 @@ export default function Home() {
         <section className={`${backgroundColour} ${textColour1} rounded-lg min-h-[145px] flex flex-col justify-between rounded-b-none w-full text-center`}>
           {/* CALCULATION */}
           <title>Calculapp</title>
-          <section className="bg-indigo-500 w-full rounded-t-lg">
+          <section className={`${backgroundColourDarker} w-full rounded-t-lg`}>
             <h1 className="text-white text-[30px] italic p-1">Calculapp</h1>
           </section>
           {/* DEV USE ONLY DEBUGGING */}
