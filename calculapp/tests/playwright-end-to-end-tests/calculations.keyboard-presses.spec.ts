@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('Click buttons', async ({ page }) => {
+test('Press hotkeys', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   await page.keyboard.press('1');
   await page.keyboard.press('2')
@@ -86,7 +86,6 @@ test('multiplication with "*"', async ({ page }) => {
   await page.keyboard.press('.');
   await page.keyboard.press('3');
   await page.keyboard.press('=')
-
   let text = await page.textContent('#output');
   expect(text).toBe('11.3');
   let history = await page.textContent('#history')
@@ -218,7 +217,7 @@ test('Combination of key press and on-screen "÷"', async ({ page }) => {
 test('duplicate decimal places', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   let text = await page.textContent('#output');
-  // Case: =ing a single decimal
+  // Case: Entering a single decimal
   await page.keyboard.press('Escape');
   await page.keyboard.press('1');
   await page.keyboard.press('2');
@@ -233,7 +232,7 @@ test('duplicate decimal places', async ({ page }) => {
   expect(text).toBe('124.45');
   let history = await page.textContent('#history')
   expect(history).toBe('123.45 + 1')
-  // Case: =ing a decimal with no zero
+  // Case: Entering a decimal with no zero
   await page.keyboard.press('Escape');
   await page.keyboard.press('.');
   await page.keyboard.press('6');
@@ -245,7 +244,7 @@ test('duplicate decimal places', async ({ page }) => {
   expect(text).toBe('1.6');
   history = await page.textContent('#history')
   expect(history).toBe('0.6 + 1')
-  // Case: =ing a number instantly with three decimal places
+  // Case: Entering a number instantly with three decimal places
   await page.keyboard.press('Escape');
   await page.keyboard.press('.');
   await page.keyboard.press('.');
@@ -262,7 +261,7 @@ test('duplicate decimal places', async ({ page }) => {
   history = await page.textContent('#history')
   expect(history).toBe('0.5 × 2.5')
   await page.keyboard.press('Escape');
-  // Case: =ing two decimal places after a calculation
+  // Case: Entering two decimal places after a calculation
   await page.keyboard.press('2');
   await page.keyboard.press('.');
   await page.keyboard.press('2');
@@ -272,9 +271,9 @@ test('duplicate decimal places', async ({ page }) => {
   await page.keyboard.press('-');
   await page.keyboard.press('1');
   await page.keyboard.press('.');
+  await page.keyboard.press('.');
   await page.keyboard.press('2');
   await page.keyboard.press('=')
-
   text = await page.textContent('#output');
   expect(text).toBe('1.3');
   history = await page.textContent('#history')
@@ -284,13 +283,10 @@ test('duplicate decimal places', async ({ page }) => {
 
 test('double "=" press does not clear output', async ({ page }) => {
   await page.goto('http://localhost:3000/');
-  await page.click('button:has-text("3")');
-  await page.click('button:has-text("+")');
-  await page.click('button:has-text("4")');
+  await page.keyboard.press('3')
+  await page.keyboard.press('+')
+  await page.keyboard.press('4')
   await page.keyboard.press('=')
-
-  await page.keyboard.press('=')
-
   let text = await page.textContent('#output');
   expect(text).toBe('7');
   let history = await page.textContent('#history')
@@ -311,7 +307,7 @@ test('"=" -> ".", "Ans" or a number clears output', async ({ page }) => {
   let history = await page.textContent('#history')
   expect(history).toBe('')
   // Case: = followed by number
-  await page.click('#Clear');
+  await page.keyboard.press('Escape')
   await page.keyboard.press('1');
   await page.keyboard.press('+');
   await page.keyboard.press('2');
@@ -356,7 +352,7 @@ test('"Ans"', async ({ page }) => {
   let history = await page.textContent('#history')
   expect(history).toBe('3 + 4 - 7')
   // Case: 3 + 4 = Ans = "0"
-  await page.click('#Clear');
+  await page.keyboard.press('Escape')
   await page.keyboard.press('3');
   await page.keyboard.press('+');
   await page.keyboard.press('4');
