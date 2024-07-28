@@ -228,15 +228,14 @@ export default function Home() {
             <h1 className="text-white text-[30px] italic p-1">Calculapp</h1>
           </section>
           {/* DEV USE ONLY DEBUGGING */}
-          <section>
+          {/* <section>
             <div>OUTPUT {output}</div>
             <div>VARIABLE {variable}</div>
             <div>VARIABLELENGTH {variable.length}</div>
             <div>OPERATION {operation}</div>
             <div>CONDITION {(operation == "" && variable.length == 0) ? "true" : "false"}</div>
-
             <div></div>
-          </section>
+          </section> */}
 
           <section className="p-2">
             <section className="text-xs">
