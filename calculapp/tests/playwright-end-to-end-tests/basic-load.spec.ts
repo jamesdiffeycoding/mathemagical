@@ -9,8 +9,8 @@ test('Page title', async ({ page }) => {
 
 test('basic inputs', async ({ page }) => {
   await page.goto('http://localhost:3000/');
-  // Case: starting with empty output
-  let text = await page.textContent('#output');
+  // Case: starting with empty answer
+  let text = await page.textContent('#answer');
   expect(text).toBe('0');
   let history = await page.textContent('#history')
   expect(history).toBe('')
