@@ -190,7 +190,6 @@ export default function Home() {
       <section className={`w-5/6 max-w-[800px] border-${colour}-600 border-4 rounded-xl text-[25px] font-bold bg-gray-300`} /* bg-gray-300 is in case the colour theme class doesn't compile */>
         <section className={`bg-${colour}-300 text-black rounded-lg min-h-[145px] flex flex-col justify-between rounded-b-none w-full text-center`}>
           {/* CALCULATION */}
-          <title>Calculapp</title>
           <section className={`bg-${colour}-500 w-full rounded-t-lg cursor-pointer`} onClick={changeColour}>
             <h1 className="text-black opacity-75 text-[30px] italic p-1">Calculapp</h1>
           </section>

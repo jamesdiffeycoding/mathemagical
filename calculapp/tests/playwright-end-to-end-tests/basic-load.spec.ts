@@ -4,7 +4,7 @@ test('Load page', async ({ page }) => {
 });
 test('Page title', async ({ page }) => {
   await page.goto('http://localhost:3000/');
-  await expect(page).toHaveTitle(/Calculapp/); // This refers to the page title at the top of the browser
+  await expect(page).toHaveTitle(/CalculApp/); // This refers to the page title at the top of the browser
 });
 
 test('basic inputs', async ({ page }) => {
