@@ -45,8 +45,10 @@ export default function Home() {
         case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9': handleEntry(keyPressed); break;
         case '.': handleDecimalPoint(); break;
         case '+': case '-': /* '×' amd '÷' are not keys*/ handleOperation(keyPressed); break;
-        case '/': handleOperation('÷'); break;
-        case '*': case 'x': handleOperation('×'); break;
+        case 'p': case 'P': handleOperation('+'); break;
+        case 'm': case 'M': handleOperation('-'); break;
+        case '/': case 'd': case 'D': handleOperation('÷'); break;
+        case '*': case 'x': case 'X': handleOperation('×'); break;
         case '=': handleEqualsPress(); break;
         case 'c': case 'C': handleClearEntry(); break;
         case 'Escape': handleClearCalculator(); break;
@@ -217,8 +219,8 @@ export default function Home() {
           {/* CHILD GRID#1: TOP ROW */}
           <section className={`text-${colour}-700 col-span-4 grid grid-cols-4`}>
             <ButtonComponent colour={colour} symbol="Clear" hotkey="esc" onClickFunction={handleClearCalculator} extraClasses=""></ButtonComponent>
-            <ButtonComponent colour={colour} symbol="÷" hotkey="/" onClickFunction={() => handleOperation("÷")} extraClasses=""></ButtonComponent>
-            <ButtonComponent colour={colour} symbol="×" hotkey="x" onClickFunction={() => handleOperation("×")} extraClasses=""></ButtonComponent>
+            <ButtonComponent colour={colour} symbol="÷" hotkey="/ d" onClickFunction={() => handleOperation("÷")} extraClasses=""></ButtonComponent>
+            <ButtonComponent colour={colour} symbol="×" hotkey="* x" onClickFunction={() => handleOperation("×")} extraClasses=""></ButtonComponent>
             <ButtonComponent colour={colour} symbol="ce" hotkey="c" onClickFunction={handleClearEntry} extraClasses=""></ButtonComponent>
           </section>
           {/* CHILD GRID#2: NUMBERS 1-9 */}
@@ -231,8 +233,8 @@ export default function Home() {
 
           {/* CHILD GRID#3: RIGHT COL */}
           <section className={`text-${colour}-600 row-span-3 grid grid-rows-3`}>
-            <ButtonComponent colour={colour} symbol="+" hotkey="" onClickFunction={() => handleOperation("+")} extraClasses=""></ButtonComponent>
-            <ButtonComponent colour={colour} symbol="-" hotkey="" onClickFunction={() => handleOperation("-")} extraClasses=""></ButtonComponent>
+            <ButtonComponent colour={colour} symbol="+" hotkey="p" onClickFunction={() => handleOperation("+")} extraClasses=""></ButtonComponent>
+            <ButtonComponent colour={colour} symbol="-" hotkey="m" onClickFunction={() => handleOperation("-")} extraClasses=""></ButtonComponent>
             <ButtonComponent colour={colour} symbol="Ans" hotkey="a" onClickFunction={handleGetPreviousAnswer} extraClasses=""></ButtonComponent>
           </section>
 

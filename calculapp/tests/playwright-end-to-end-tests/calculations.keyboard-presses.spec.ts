@@ -17,6 +17,14 @@ test('Press hotkeys', async ({ page }) => {
   await page.keyboard.press('.')
   await page.keyboard.press('x')
   await page.keyboard.press('/')
+  await page.keyboard.press('D')
+  await page.keyboard.press('d')
+  await page.keyboard.press('d')
+  await page.keyboard.press('d')
+  await page.keyboard.press('p')
+  await page.keyboard.press('P')
+
+
   await page.keyboard.press('*')
   await page.keyboard.press('=')
   await page.keyboard.press('c')
@@ -133,7 +141,7 @@ test('Combination of key press and on-screen "×"', async ({ page }) => {
   let history = await page.textContent('#history')
   expect(history).toBe('4.2 × 3 - 1.3')
 });
-test('division with /', async ({ page }) => {
+test('division with hotkeys', async ({ page }) => {
   await page.goto('http://localhost:3000/');
   // Case: simple division test with multiple decimals and negative answer
   await page.keyboard.press('4');
@@ -155,13 +163,13 @@ test('division with /', async ({ page }) => {
   await page.keyboard.press('2');
   await page.keyboard.press('4');
   await page.keyboard.press('2');
-  await page.keyboard.press('/');
+  await page.keyboard.press('d');
   await page.keyboard.press('2');
   await page.keyboard.press('2');
   await page.keyboard.press('1');
   await page.keyboard.press('.');
   await page.keyboard.press('1');
-  await page.keyboard.press('/');
+  await page.keyboard.press('D');
   await page.keyboard.press('3');
   await page.keyboard.press('=')
 
@@ -247,7 +255,7 @@ test('duplicate decimal places', async ({ page }) => {
   await page.keyboard.press('.');
   await page.keyboard.press('.');
   await page.keyboard.press('5');
-  await page.keyboard.press('*');
+  await page.keyboard.press('x');
   await page.keyboard.press('2');
   await page.keyboard.press('.');
   await page.keyboard.press('5');
@@ -262,10 +270,10 @@ test('duplicate decimal places', async ({ page }) => {
   await page.keyboard.press('2');
   await page.keyboard.press('.');
   await page.keyboard.press('2');
-  await page.keyboard.press('+');
+  await page.keyboard.press('P');
   await page.keyboard.press('.');
   await page.keyboard.press('3');
-  await page.keyboard.press('-');
+  await page.keyboard.press('m');
   await page.keyboard.press('1');
   await page.keyboard.press('.');
   await page.keyboard.press('.');
@@ -387,7 +395,7 @@ test('swapping to addition/subtraction from division/multiplicaiton is handled c
   await page.keyboard.press('/')
   await page.keyboard.press('*');
   await page.keyboard.press('2');
-  await page.keyboard.press('/')
+  await page.keyboard.press('d')
   await page.keyboard.press('+');
   await page.keyboard.press('-');
   await page.keyboard.press('7')

@@ -24,7 +24,8 @@ A keyboard-friendly calculator with input history.
 - Decimal JS avoids JavaScript rounding issues
 
 ## Bug list to sort and produce tests for
-- pressing an operation after division --> Infinity, or after multiplication --> 0 as I suspect variable is treated as 0.
+- none currently, let me know if you spot one - @diffeyj@outlook.com
+
 
 [Calculapp Deployment](https://math-calculapp.vercel.app/)
 
