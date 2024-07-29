@@ -1,6 +1,15 @@
 "use client"
 
-export default function ButtonComponent({ colour, symbol, hotkey, onClickFunction, extraClasses }) {
+interface ButtonProps {
+    colour: string;
+    symbol: string;
+    hotkey?: string;
+    onClickFunction: () => void;
+    extraClasses?: string;
+}
+
+
+export default function ButtonComponent({ colour, symbol, hotkey, onClickFunction, extraClasses }: ButtonProps) {
 
 
     return (
