@@ -209,7 +209,7 @@ test('Combination of key press and on-screen "÷"', async ({ page }) => {
   await page.keyboard.press('1');
   await page.keyboard.press("/");
   await page.keyboard.press('3');
-  await page.keyboard.press('=')
+  await page.keyboard.press('E')
 
   text = await page.textContent('#answer');
   expect(text).toBe('6.395296246'); //1 significant specified to it fits in calculator
@@ -278,7 +278,7 @@ test('duplicate decimal places', async ({ page }) => {
   await page.keyboard.press('.');
   await page.keyboard.press('.');
   await page.keyboard.press('2');
-  await page.keyboard.press('=')
+  await page.keyboard.press('e')
   text = await page.textContent('#answer');
   expect(text).toBe('1.3');
   history = await page.textContent('#history')

@@ -49,7 +49,7 @@ export default function Home() {
         case 'm': case 'M': handleOperation('-'); break;
         case '/': case 'd': case 'D': handleOperation('÷'); break;
         case '*': case 'x': case 'X': handleOperation('×'); break;
-        case '=': handleEqualsPress(); break;
+        case '=': case 'e': case 'E': handleEqualsPress(); break;
         case 'c': case 'C': handleClearEntry(); break;
         case 'Escape': handleClearCalculator(); break;
         case 'a': case 'A': handleGetPreviousAnswer(); break;
@@ -241,7 +241,7 @@ export default function Home() {
           {/* BOTTOM ROW */}
           <ButtonComponent colour={colour} symbol="0" hotkey="" onClickFunction={() => handleEntry("0")} extraClasses=""></ButtonComponent>
           <ButtonComponent colour={colour} symbol="." hotkey="" onClickFunction={handleDecimalPoint} extraClasses=""></ButtonComponent>
-          <ButtonComponent colour={colour} symbol="=" hotkey="" onClickFunction={handleEqualsPress} extraClasses={`bg-${colour}-300 border-${colour}-500 border-t-4 border-l-4 rounded-tl-lg rounded-r-lg rounded-tr-none flex col-span-2`}></ButtonComponent>
+          <ButtonComponent colour={colour} symbol="=" hotkey="e" onClickFunction={handleEqualsPress} extraClasses={`bg-${colour}-300 border-${colour}-500 border-t-4 border-l-4 rounded-tl-lg rounded-r-lg rounded-tr-none flex col-span-2`}></ButtonComponent>
 
 
           {/* THE BELOW SECTION ENSURES TAILWIND STYLES FOR ALL COLOUR THEMES LOAD, SINCE THEY ARE INCLUDED IN THE BUNDLE AT COMPILE TIME */}
