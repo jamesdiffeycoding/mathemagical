@@ -187,7 +187,7 @@ export default function Home() {
   return (
     <main className={`pattern-${colour}-500 pattern-paper pattern-bg-white pattern-size-6 pattern-opacity-100 flex min-h-screen flex-col align-middle justify-center items-center`}>
       {/* ENTIRE CALCULATOR */}
-      <section className={`w-5/6 max-w-[800px] border-${colour}-600 bg-${colour}-300 border-4 rounded-xl text-[25px] font-bold`}>
+      <section className={`w-5/6 max-w-[800px] border-${colour}-600 border-4 rounded-xl text-[25px] font-bold bg-gray-300`} /* bg-gray-300 is in case the colour theme class doesn't compile */>
         <section className={`bg-${colour}-300 text-black rounded-lg min-h-[145px] flex flex-col justify-between rounded-b-none w-full text-center`}>
           {/* CALCULATION */}
           <title>Calculapp</title>
