@@ -171,10 +171,13 @@ export default function Home() {
     <main className={`pattern-${colour}-500 pattern-paper pattern-bg-white pattern-size-6 pattern-opacity-100 flex min-h-screen flex-col align-middle justify-center items-center`}>
       {/* ENTIRE CALCULATOR */}
       <section className={`w-5/6 max-w-[800px] border-${colour}-600 border-4 rounded-xl text-[25px] font-bold bg-gray-300`} /* bg-gray-300 is in case the colour theme class doesn't compile */>
-        <section className={`bg-${colour}-300 text-black rounded-lg min-h-[145px] flex flex-col justify-between rounded-b-none w-full text-center`}>
+        <section className={`bg-${colour}-300 text-black rounded-lg min-h-[185px] flex flex-col justify-between rounded-b-none w-full text-center`}>
           {/* CALCULATION */}
-          <section className={`bg-${colour}-500 w-full rounded-t-lg cursor-pointer hover:border-l-8 hover:border-r-8`} onClick={changeColour}>
-            <h1 className="text-white opacity-75 text-[30px] italic p-1">Calculapp</h1>
+          <section className={`bg-${colour}-500 w-full rounded-t-lg p-3`}>
+            <h1 className="text-white opacity-90 text-[30px] italic">Calculapp</h1>
+            <div className="flex justify-center">
+              <p className={`w-1/5 font-normal bg-${colour}-400 cursor-pointer text-sm border-${colour}-200 border-2 rounded-md hover:bg-${colour}-300 hover:border-l-8 hover:border-r-8`} onClick={changeColour}>Change Theme</p>
+            </div>
           </section>
           {/* DEV USE ONLY DEBUGGING */}
           {/* <section>
@@ -212,30 +215,30 @@ export default function Home() {
 
           {/* CHILD GRID#1: TOP ROW */}
           <section className={`text-${colour}-700 col-span-4 grid grid-cols-4`}>
-            <button id="Clear" className={`hover:bg-${colour}-300`} onClick={() => handleClearCalculator()}>Clear</button>
-            <button id="÷" className={`hover:bg-${colour}-300`} onClick={(event) => handleOperation(event.currentTarget.textContent || "")}>÷</button>
-            <button id="×" className={`hover:bg-${colour}-300`} onClick={(event) => handleOperation(event.currentTarget.textContent || "")}>×</button>
-            <button id="ce" className={`hover:bg-${colour}-300`} onClick={() => handleClearEntry()}>ce</button>
+            <button id="Clear" className={`border-${colour}-300 border rounded-md  hover:bg-${colour}-300`} onClick={() => handleClearCalculator()}>Clear</button>
+            <button id="÷" className={`border-${colour}-300 border rounded-md  hover:bg-${colour}-300`} onClick={(event) => handleOperation(event.currentTarget.textContent || "")}>÷</button>
+            <button id="×" className={`border-${colour}-300 border rounded-md  hover:bg-${colour}-300`} onClick={(event) => handleOperation(event.currentTarget.textContent || "")}>×</button>
+            <button id="ce" className={`border-${colour}-300 border rounded-md  hover:bg-${colour}-300`} onClick={() => handleClearEntry()}>ce</button>
           </section>
 
 
           {/* CHILD GRID#2: NUMBERS 1-9 */}
           <section className="col-span-3 row-span-3 grid grid-cols-3 grid-rows-3">
             {["7", "8", "9", "4", "5", "6", "1", "2", "3"].map((num) => (
-              <button key={num} id={num} className={`hover:bg-${colour}-300`} onClick={(event) => handleEntry(event.currentTarget.textContent || "")}>{num}</button>
+              <button key={num} id={num} className={`border-${colour}-300 border rounded-md hover:bg-${colour}-300`} onClick={(event) => handleEntry(event.currentTarget.textContent || "")}>{num}</button>
             ))}
           </section>
 
 
           {/* CHILD GRID#3: RIGHT COL */}
           <section className={`text-${colour}-600 row-span-3 grid grid-rows-3`}>
-            <button id="-" className={`hover:bg-${colour}-300 text-${colour}-600 `} onClick={(event) => handleOperation(event.currentTarget.textContent || "")}>-</button>
-            <button id="+" className={`hover:bg-${colour}-300 text-${colour}-600`} onClick={(event) => handleOperation(event.currentTarget.textContent || "")}>+</button>
-            <button id="Ans" className={`hover:bg-${colour}-300 text-${colour}-600`} onClick={() => handleGetPreviousAnswer()}>Ans</button>
+            <button id="-" className={`border-${colour}-300 border rounded-md hover:bg-${colour}-300 text-${colour}-600 `} onClick={(event) => handleOperation(event.currentTarget.textContent || "")}>-</button>
+            <button id="+" className={`border-${colour}-300 border rounded-md hover:bg-${colour}-300 text-${colour}-600`} onClick={(event) => handleOperation(event.currentTarget.textContent || "")}>+</button>
+            <button id="Ans" className={`border-${colour}-300 border rounded-md  hover:bg-${colour}-300 text-${colour}-600`} onClick={() => handleGetPreviousAnswer()}>Ans</button>
           </section>
-          <button id="0" className={`hover:bg-${colour}-300`} onClick={(event) => handleEntry(event.currentTarget.textContent || "")}>0</button>
-          <button id="." className={`hover:bg-${colour}-300  text-${colour}-600`} onClick={() => handleDecimalPoint()}>.</button>
-          <div className={`bg-${colour}-300 text-black rounded-r-lg rounded-tr-none flex col-span-2`}>
+          <button id="0" className={`border-${colour}-300 border rounded-md hover:bg-${colour}-300`} onClick={(event) => handleEntry(event.currentTarget.textContent || "")}>0</button>
+          <button id="." className={`border-${colour}-300 border rounded-md hover:bg-${colour}-300  text-${colour}-600`} onClick={() => handleDecimalPoint()}>.</button>
+          <div className={`bg-${colour}-300 border-${colour}-500 border-t-4 border-l-4 text-black rounded-tl-lg rounded-r-lg rounded-tr-none flex col-span-2`}>
             <button id="=" className=" text-center w-full" onClick={() => handleEqualsPress()}>=</button>
           </div>
 
@@ -247,6 +250,10 @@ export default function Home() {
             <div className="bg-indigo-300"></div>
             <div className="bg-orange-300"></div>
             <div className="bg-pink-300"></div>
+            <div className="bg-lime-400"></div>
+            <div className="bg-indigo-400"></div>
+            <div className="bg-orange-400"></div>
+            <div className="bg-pink-400"></div>
             <div className="bg-lime-500"></div>
             <div className="bg-indigo-500"></div>
             <div className="bg-orange-500"></div>
@@ -259,6 +266,20 @@ export default function Home() {
             <div className="text-indigo-600"></div>
             <div className="text-orange-600"></div>
             <div className="text-pink-600"></div>
+            <div className="border-lime-200"></div>
+            <div className="border-indigo-200"></div>
+            <div className="border-orange-200"></div>
+            <div className="border-pink-200"></div>
+            <div className="border-lime-300"></div>
+            <div className="border-indigo-300"></div>
+            <div className="border-orange-300"></div>
+            <div className="border-pink-300"></div>
+
+            <div className="border-lime-400"></div>
+            <div className="border-indigo-400"></div>
+            <div className="border-orange-400"></div>
+            <div className="border-pink-400"></div>
+
             <div className="border-lime-600"></div>
             <div className="border-indigo-600"></div>
             <div className="border-orange-600"></div>

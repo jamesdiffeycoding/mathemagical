@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 const colours = ["lime", "indigo", "orange", "pink"];
 
 function useColour() {
-    const [colourIndex, setColourIndex] = useState("indigo");
+    const [colourIndex, setColourIndex] = useState(1);
     const [colour, setColour] = useState(colours[colourIndex]);
 
     useEffect(() => {
