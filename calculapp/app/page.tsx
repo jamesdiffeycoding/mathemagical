@@ -1,31 +1,16 @@
 "use client"
 import { useState, useEffect, useRef } from "react"
 import Decimal from "decimal.js" // Decimal JS prevents JavaScript rounding errors (e.g. 3.3+3.3 = 6.59999)
+import useColour from './hooks/useColour'
 
 // FEATURES FOR FUTURE
 // ---- solar power button?
 // ---- bug report button?
 
 export default function Home() {
-
   /* ---------------------------- COLOUR THEME -----------------------------------------------------------*/
-  const colours = ["lime", "indigo", "orange", "pink"]
-  let randomColourIndex = Math.floor(Math.random() * colours.length)
-  const [colourIndex, setColourIndex] = useState(randomColourIndex)
-  const [colour, setColour] = useState(colours[colourIndex])
+  const { colour, changeColour } = useColour();
 
-  function changeColour() {
-    let newIndex: number
-    if (colourIndex < colours.length - 1) {
-      newIndex = colourIndex + 1
-    } else {
-      newIndex = 0
-    }
-    setColourIndex(newIndex)
-  }
-  useEffect(() => { /* Update colour state whenever index changes */
-    setColour(colours[colourIndex])
-  }, [colourIndex])
 
 
   /* ---------------------------- CALCULATOR FUNCTIONALITY ------------------------------------------------*/
@@ -191,7 +176,7 @@ export default function Home() {
         <section className={`bg-${colour}-300 text-black rounded-lg min-h-[145px] flex flex-col justify-between rounded-b-none w-full text-center`}>
           {/* CALCULATION */}
           <section className={`bg-${colour}-500 w-full rounded-t-lg cursor-pointer`} onClick={changeColour}>
-            <h1 className="text-black opacity-75 text-[30px] italic p-1">Calculapp</h1>
+            <h1 className="text-white opacity-75 text-[30px] italic p-1">Calculapp</h1>
           </section>
           {/* DEV USE ONLY DEBUGGING */}
           {/* <section>

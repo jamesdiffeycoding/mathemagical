@@ -18,6 +18,7 @@ It's a homemade keyboard friendly calculator with input history.
 
 ## Technical decisions
 - useRefs hooks allow keyboard presses to sync with calculation-related states
+- custom useColor hook for more maintainable code
 - state-based class names allow colour themes to be generated
 - hidden section containing all tailwind colour theme styles ensure compiler loads all colour classes
 - Decimal JS avoids JavaScript rounding issues
