@@ -14,6 +14,24 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       patterns: {
+        colors: {
+          // lime: {
+          //   500: '#a3e635',
+          //   600: '#84d12e',
+          // },
+          indigo: {
+            500: '#4f46e5',
+            600: '#3730a3',
+          },
+          orange: {
+            500: '#f97316',
+            600: '#ea580c',
+          },
+          pink: {
+            500: '#ec4899',
+            600: '#db2777',
+          },
+        },
         opacities: {
           100: "1",
           80: ".80",

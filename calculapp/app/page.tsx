@@ -11,8 +11,6 @@ export default function Home() {
   /* ---------------------------- COLOUR THEME -----------------------------------------------------------*/
   const { colour, changeColour } = useColour();
 
-
-
   /* ---------------------------- CALCULATOR FUNCTIONALITY ------------------------------------------------*/
   const [answer, setAnswer] = useState("")
   const [history, setHistory] = useState("")
@@ -245,7 +243,7 @@ export default function Home() {
           {/* THE BELOW SECTION ENSURES TAILWIND STYLES FOR ALL COLOUR THEMES LOAD, SINCE THEY ARE INCLUDED IN THE BUNDLE AT COMPILE TIME */}
           {/* The extra DOM elements are inconvenient but necessary for loading the styles for the colour themes. */}
           <section className="hidden">
-            <div className="bg-lime-300"></div>
+            {/* <div className="bg-lime-300"></div>
             <div className="bg-indigo-300"></div>
             <div className="bg-orange-300"></div>
             <div className="bg-pink-300"></div>
@@ -276,7 +274,7 @@ export default function Home() {
             <div className="pattern-lime-500"></div>
             <div className="pattern-indigo-500"></div>
             <div className="pattern-orange-500"></div>
-            <div className="pattern-pink-500"></div>
+            <div className="pattern-pink-500"></div> */}
           </section>
 
         </section>
