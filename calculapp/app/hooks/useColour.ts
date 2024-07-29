@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react';
 const colours = ["lime", "indigo", "orange", "pink"];
 
 function useColour() {
-    let randomFirstIndex = Math.floor(Math.random() * colours.length)
-    const [colourIndex, setColourIndex] = useState(randomFirstIndex);
+    const [colourIndex, setColourIndex] = useState("indigo");
     const [colour, setColour] = useState(colours[colourIndex]);
 
     useEffect(() => {
