@@ -7,10 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest",
+    "vitest": "vitest",
     "prtm": "playwright test",
     "caution": "node playwright-caution",
-    "prui": "playwright test --ui",
+    "pr": "playwright test --ui",
     "prdb": "playwright test --debug",
     "prcg": "playwright codegen",
     "prrp": "playwright show-report"
