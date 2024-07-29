@@ -224,7 +224,7 @@ export default function Home() {
           {/* CHILD GRID#2: NUMBERS 1-9 */}
           <section className="col-span-3 row-span-3 grid grid-cols-3 grid-rows-3">
             {["7", "8", "9", "4", "5", "6", "1", "2", "3"].map((num) => (
-              <ButtonComponent key={num} colour={colour} symbol={num} hotkey="" onClickFunction={() => handleEntry(num)}></ButtonComponent>
+              <ButtonComponent key={num} colour={colour} symbol={num} hotkey="" onClickFunction={() => handleEntry(num)} extraClasses=""></ButtonComponent>
             ))}
           </section>
 
