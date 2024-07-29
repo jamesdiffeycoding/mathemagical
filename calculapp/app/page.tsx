@@ -176,7 +176,7 @@ export default function Home() {
           <section className={`bg-${colour}-500 w-full rounded-t-lg p-3`}>
             <h1 className="text-white opacity-90 text-[30px] italic">Calculapp</h1>
             <div className="flex justify-center">
-              <p className={`w-1/5 font-normal bg-${colour}-400 cursor-pointer text-sm border-${colour}-200 border-2 rounded-md hover:bg-${colour}-300 hover:border-l-8 hover:border-r-8`} onClick={changeColour}>Change Theme</p>
+              <p className={`w-1/5 font-normal bg-${colour}-400 cursor-pointer text-sm border-${colour}-200 border-2 rounded-md hover:bg-${colour}-300 hover:border-l-8 hover:border-r-8`} onClick={changeColour}>Change theme</p>
             </div>
           </section>
           {/* DEV USE ONLY DEBUGGING */}
