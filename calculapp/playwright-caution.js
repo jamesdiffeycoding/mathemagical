@@ -1,0 +1,6 @@
+console.log("  ")
+console.log("  ")
+console.log("---- WARNING ----- WARNING ----- WARNING ------")
+console.log("playwright test in terminal can NOT simulate key presses")
+console.log("  ")
+console.log("  ")
