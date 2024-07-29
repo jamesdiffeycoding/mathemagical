@@ -1,6 +1,6 @@
 # CalculApp
 
-It's a homemade keyboard friendly calculator with input history.
+A keyboard-friendly calculator with input history.
 
 ## Notable features
 - Logs your input history
