@@ -12,12 +12,11 @@ export default function Home() {
   const { colour, changeColour } = useColour();
 
   /* ---------------------------- CALCULATOR FUNCTIONALITY ------------------------------------------------*/
+  const [entry, setEntry] = useState("")
+  const [entryIsDecimal, setEntryIsDecimal] = useState(false)
+  const [operation, setOperation] = useState(" ") /* Keep as " ", see footnotes. */
   const [answer, setAnswer] = useState("")
   const [history, setHistory] = useState("")
-  const [entry, setEntry] = useState("")
-  const [operation, setOperation] = useState(" ") /* Keep as " ", see footnotes. */
-
-  const [entryIsDecimal, setEntryIsDecimal] = useState(false)
   /* REFS ----------------------------------------------------------------------*/
   /* Refs are needed because otherwise key press event listeners only work have 
   access to initial state when the event listener is mounted.  --------*/
@@ -98,7 +97,9 @@ export default function Home() {
     if (answerRef.current == "") {
       setAnswer(entryRef.current)
     } else {
-      handleAnswerCalculation()
+      if (entryRef.current != "") {
+        handleAnswerCalculation()
+      }
     }
     handleClearEntry()
   }

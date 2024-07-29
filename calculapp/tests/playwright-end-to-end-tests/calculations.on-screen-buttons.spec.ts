@@ -270,3 +270,43 @@ test('"Ans"', async ({ page }) => {
   history = await page.textContent('#history')
   expect(history).toBe('')
 })
+
+
+
+test('swapping to addition/subtraction from division/multiplication is handled correctly', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+
+  // Case 1: multiplication and division, then subtraction
+  await page.click('button:has-text("3")');
+  await page.click('button:has-text("+")');
+  await page.click('button:has-text("×")');
+  await page.click('button:has-text("-")');
+  await page.click('button:has-text("×")');
+  await page.click('button:has-text("÷")');
+  await page.click('button:has-text("×")');
+  await page.click('button:has-text("-")');
+  await page.click('button:has-text("7")');
+  await page.click('button:has-text("=")');
+
+  let text = await page.textContent('#answer');
+  expect(text).toBe('-4');
+  let history = await page.textContent('#history');
+  expect(history).toBe('3 - 7');
+
+  // Case 2: division and multiplication, then addition and subtraction
+  await page.click('#Clear');  // Assuming there's a clear button to reset
+  await page.click('button:has-text("3")');
+  await page.click('button:has-text("÷")');
+  await page.click('button:has-text("×")');
+  await page.click('button:has-text("2")');
+  await page.click('button:has-text("÷")');
+  await page.click('button:has-text("+")');
+  await page.click('button:has-text("-")');
+  await page.click('button:has-text("7")');
+  await page.click('button:has-text("=")');
+
+  text = await page.textContent('#answer');
+  expect(text).toBe('-1');
+  history = await page.textContent('#history');
+  expect(history).toBe('3 × 2 - 7');
+});

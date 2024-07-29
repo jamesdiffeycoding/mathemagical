@@ -24,7 +24,7 @@ test('Press hotkeys', async ({ page }) => {
   await page.keyboard.press('a')
   await page.keyboard.press('A')
   await page.keyboard.press('=')
-  await page.keyboard.press('Escape')
+  await page.keyboard.press('Escape') //clear
 
 });
 
@@ -120,8 +120,7 @@ test('Combination of key press and on-screen "×"', async ({ page }) => {
   await page.keyboard.press('.');
   await page.keyboard.press('2');
   await page.keyboard.press('+');
-  await page.click('button:has-text("×")');
-
+  await page.keyboard.press('x');
   await page.keyboard.press('3');
   await page.keyboard.press('-');
   await page.keyboard.press('1');
@@ -176,7 +175,7 @@ test('Combination of key press and on-screen "÷"', async ({ page }) => {
   // Case: simple division test with multiple decimals and negative answer
   await page.keyboard.press('4');
   await page.keyboard.press('2');
-  await page.click('button:has-text("÷")');
+  await page.keyboard.press("/")
   await page.keyboard.press('2');
   await page.keyboard.press('-');
   await page.keyboard.press('1');
@@ -194,15 +193,13 @@ test('Combination of key press and on-screen "÷"', async ({ page }) => {
   await page.keyboard.press('2');
   await page.keyboard.press('4');
   await page.keyboard.press('2');
-  await page.click('button:has-text("÷")');
-  ;
+  await page.keyboard.press("/");
   await page.keyboard.press('2');
   await page.keyboard.press('2');
   await page.keyboard.press('1');
   await page.keyboard.press('.');
   await page.keyboard.press('1');
-  await page.click('button:has-text("÷")');
-  ;
+  await page.keyboard.press("/");
   await page.keyboard.press('3');
   await page.keyboard.press('=')
 
@@ -365,4 +362,39 @@ test('"Ans"', async ({ page }) => {
   expect(text).toBe('0');
   history = await page.textContent('#history')
   expect(history).toBe('')
+})
+
+test('swapping to addition/subtraction from division/multiplicaiton is handled correctly ', async ({ page }) => {
+  await page.goto('http://localhost:3000/');
+  // Case 1: multiplication
+  await page.keyboard.press('3')
+  await page.keyboard.press('+')
+  await page.keyboard.press('*');
+  await page.keyboard.press('-');
+  await page.keyboard.press('*');
+  await page.keyboard.press('/');
+  await page.keyboard.press('*');
+  await page.keyboard.press('-');
+  await page.keyboard.press('7')
+  await page.keyboard.press('=')
+  let text = await page.textContent('#answer');
+  expect(text).toBe('-4');
+  let history = await page.textContent('#history')
+  expect(history).toBe('3 - 7')
+
+  // Case 2: division
+  await page.keyboard.press('3')
+  await page.keyboard.press('/')
+  await page.keyboard.press('*');
+  await page.keyboard.press('2');
+  await page.keyboard.press('/')
+  await page.keyboard.press('+');
+  await page.keyboard.press('-');
+  await page.keyboard.press('7')
+  await page.keyboard.press('=')
+  text = await page.textContent('#answer');
+  expect(text).toBe('-1');
+  history = await page.textContent('#history')
+  expect(history).toBe('3 × 2 - 7')
+
 })
