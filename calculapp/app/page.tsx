@@ -2,7 +2,7 @@
 import { useState, useEffect, useRef } from "react"
 import Decimal from "decimal.js" // Decimal JS prevents JavaScript rounding errors (e.g. 3.3+3.3 = 6.59999)
 import useColour from './hooks/useColour'
-
+import ButtonComponent from "./components/Button"
 // FEATURES FOR FUTURE
 // ---- solar power button?
 // ---- bug report button?
@@ -216,32 +216,30 @@ export default function Home() {
 
           {/* CHILD GRID#1: TOP ROW */}
           <section className={`text-${colour}-700 col-span-4 grid grid-cols-4`}>
-            <button id="Clear" className={`border-${colour}-300 border rounded-md  hover:bg-${colour}-300`} onClick={() => handleClearCalculator()}>Clear</button>
-            <button id="÷" className={`border-${colour}-300 border rounded-md  hover:bg-${colour}-300`} onClick={(event) => handleOperation(event.currentTarget.textContent || "")}>÷</button>
-            <button id="×" className={`border-${colour}-300 border rounded-md  hover:bg-${colour}-300`} onClick={(event) => handleOperation(event.currentTarget.textContent || "")}>×</button>
-            <button id="ce" className={`border-${colour}-300 border rounded-md  hover:bg-${colour}-300`} onClick={() => handleClearEntry()}>ce</button>
+            <ButtonComponent colour={colour} symbol="Clear" hotkey="esc" onClickFunction={handleClearCalculator} extraClasses=""></ButtonComponent>
+            <ButtonComponent colour={colour} symbol="÷" hotkey="/" onClickFunction={() => handleOperation("÷")} extraClasses=""></ButtonComponent>
+            <ButtonComponent colour={colour} symbol="×" hotkey="x" onClickFunction={() => handleOperation("×")} extraClasses=""></ButtonComponent>
+            <ButtonComponent colour={colour} symbol="ce" hotkey="c" onClickFunction={handleClearEntry} extraClasses=""></ButtonComponent>
           </section>
-
-
           {/* CHILD GRID#2: NUMBERS 1-9 */}
           <section className="col-span-3 row-span-3 grid grid-cols-3 grid-rows-3">
             {["7", "8", "9", "4", "5", "6", "1", "2", "3"].map((num) => (
-              <button key={num} id={num} className={`border-${colour}-300 border rounded-md hover:bg-${colour}-300`} onClick={(event) => handleEntry(event.currentTarget.textContent || "")}>{num}</button>
+              <ButtonComponent key={num} colour={colour} symbol={num} hotkey="" onClickFunction={() => handleEntry(num)}></ButtonComponent>
             ))}
           </section>
 
 
           {/* CHILD GRID#3: RIGHT COL */}
           <section className={`text-${colour}-600 row-span-3 grid grid-rows-3`}>
-            <button id="-" className={`border-${colour}-300 border rounded-md hover:bg-${colour}-300 text-${colour}-600 `} onClick={(event) => handleOperation(event.currentTarget.textContent || "")}>-</button>
-            <button id="+" className={`border-${colour}-300 border rounded-md hover:bg-${colour}-300 text-${colour}-600`} onClick={(event) => handleOperation(event.currentTarget.textContent || "")}>+</button>
-            <button id="Ans" className={`border-${colour}-300 border rounded-md  hover:bg-${colour}-300 text-${colour}-600`} onClick={() => handleGetPreviousAnswer()}>Ans</button>
+            <ButtonComponent colour={colour} symbol="+" hotkey="" onClickFunction={() => handleOperation("+")} extraClasses=""></ButtonComponent>
+            <ButtonComponent colour={colour} symbol="-" hotkey="" onClickFunction={() => handleOperation("-")} extraClasses=""></ButtonComponent>
+            <ButtonComponent colour={colour} symbol="Ans" hotkey="a" onClickFunction={handleGetPreviousAnswer} extraClasses=""></ButtonComponent>
           </section>
-          <button id="0" className={`border-${colour}-300 border rounded-md hover:bg-${colour}-300`} onClick={(event) => handleEntry(event.currentTarget.textContent || "")}>0</button>
-          <button id="." className={`border-${colour}-300 border rounded-md hover:bg-${colour}-300  text-${colour}-600`} onClick={() => handleDecimalPoint()}>.</button>
-          <div className={`bg-${colour}-300 border-${colour}-500 border-t-4 border-l-4 text-black rounded-tl-lg rounded-r-lg rounded-tr-none flex col-span-2`}>
-            <button id="=" className=" text-center w-full" onClick={() => handleEqualsPress()}>=</button>
-          </div>
+
+          {/* BOTTOM ROW */}
+          <ButtonComponent colour={colour} symbol="0" hotkey="" onClickFunction={() => handleEntry("0")} extraClasses=""></ButtonComponent>
+          <ButtonComponent colour={colour} symbol="." hotkey="" onClickFunction={handleDecimalPoint} extraClasses=""></ButtonComponent>
+          <ButtonComponent colour={colour} symbol="=" hotkey="" onClickFunction={handleEqualsPress} extraClasses={`bg-${colour}-300 border-${colour}-500 border-t-4 border-l-4 rounded-tl-lg rounded-r-lg rounded-tr-none flex col-span-2`}></ButtonComponent>
 
 
           {/* THE BELOW SECTION ENSURES TAILWIND STYLES FOR ALL COLOUR THEMES LOAD, SINCE THEY ARE INCLUDED IN THE BUNDLE AT COMPILE TIME */}
