@@ -1,6 +1,6 @@
 # CalculApp
 
-It's a homemade keyboard friendly calculator with input history.
+A keyboard-friendly calculator with input history.
 
 ## Notable features
 - Logs your input history
@@ -28,3 +28,4 @@ It's a homemade keyboard friendly calculator with input history.
 
 [Calculapp Deployment](https://math-calculapp.vercel.app/)
 
+![CalculappShot1](https://github.com/user-attachments/assets/f61a3d7f-ea7f-4a15-9844-737b28f0ad88)
