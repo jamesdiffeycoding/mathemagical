@@ -23,28 +23,28 @@ export default function Home() {
 
             {/* ____ MIDDLE */}
             <section className="flex justify-center items-center p-2">
-              <div>This is where I deploy little mathematical projects.</div>
+              <div className="text-sm">This is where I deploy little mathematical projects.</div>
             </section>
 
             {/* ____ BOTTOM */}
             <section className={`text-left bg-white opacity-75 border-t-4 border-${colour}-500 text-black rounded-lg text-xs p-3`}>
               <Link href="/calculapp" legacyBehavior>
-                <section className={`p-2 bg-${colour}-300 cursor-pointer`}>
+                <section className={`p-2 bg-${colour}-300 cursor-pointer hover:bg-gray-300 rounded-md`}>
                   <h1 className="text-bold text-[20px] text-center">
                     <a href="/calculapp">Calculapp</a>
                   </h1>
                   <br></br>
-                  <p>Calculapp is a fully-tested, key-board friendly calculator with input history and clearing options.</p>
+                  <p className="text-sm">Calculapp is a fully-tested, key-board friendly calculator with input history and clearing options.</p>
                 </section>
               </Link>
               <br></br>
               <Link href="/spiraliser" legacyBehavior>
-                <section className={`p-2 bg-${colour}-300 cursor-pointer`}>
+                <section className={`p-2 bg-${colour}-300 cursor-pointer hover:bg-gray-300 rounded-md`}>
                   <h1 className="text-bold text-[20px] text-center">
                     <a href="/spiraliser">Spiraliser</a>
                   </h1>
                   <br></br>
-                  <p>Spiraliser displays an animated spiral created using HTML's canvas element.</p>
+                  <p className="text-sm">Spiraliser displays an animated spiral created using HTML's canvas element.</p>
                 </section>
               </Link>
 

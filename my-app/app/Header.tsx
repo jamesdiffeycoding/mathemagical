@@ -26,7 +26,7 @@ export default function Header() {
 
 
     // {window.location.href.split('/').pop()}
-    const buttonClasses = "bg-black p-2 rounded-md hover:bg-gray-500"
+    const buttonClasses = "bg-black p-2 rounded-md hover:bg-gray-500 text-white"
     return (
         <section className={`bg-${colour}-500 flex gap-5 w-full justify-center p-2 z-10`} onClick={updateUrl}>
             {legacyButtonsNeeded ?
