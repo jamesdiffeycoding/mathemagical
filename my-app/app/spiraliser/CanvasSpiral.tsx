@@ -1,8 +1,7 @@
 // IMPORTS -------------------------------------------------------------------------------------------------------- 
 import { useState, useEffect, useRef } from 'react';
-import { coloursArray } from './rainbowRGBvalues';
+import { coloursArray } from '../rainbowRGBvalues';
 import Link from 'next/link';
-
 // COMPONENT -------------------------------------------------------------------------------------------------------- 
 export default function CanvasSpiral() {
     // THETA
@@ -113,7 +112,7 @@ export default function CanvasSpiral() {
                 {buttonValues.map((value, index) => (
                     <button
                         key={index}
-                        className="bg-white hover:bg-gray-300 gap-300 border-2 border-gray-300 rounded-md pl-2 pr-2"
+                        className="bg-white hover:bg-gray-400 gap-300 border-2 border-gray-400 rounded-md pl-2 pr-2"
                         onClick={() => handleThetaIncrement(value)}
                     >
                         {index + 1}
@@ -122,8 +121,8 @@ export default function CanvasSpiral() {
             </section>
             <section className="flex gap-2 p-1">
                 <input type="color" onChange={(event) => handleColourChange((event.currentTarget as HTMLInputElement).value)} />
-                <button className="bg-white hover:bg-gray-300 gap-300 border-2 border-gray-300 rounded-md pl-2 pr-2" onClick={() => toggleRainbowMode()}>{rainbowMode ? ("Rainbow off") : ("Rainbow on")}</button>
-                <button className="bg-white hover:bg-gray-300 gap-300 border-2 border-gray-300 rounded-md pl-2 pr-2" onClick={handleRestartAnimation}>Restart</button>
+                <button className="bg-white hover:bg-gray-400 gap-300 border-2 border-gray-400 rounded-md pl-2 pr-2" onClick={() => toggleRainbowMode()}>{rainbowMode ? ("Rainbow off") : ("Rainbow on")}</button>
+                <button className="bg-white hover:bg-gray-400 gap-300 border-2 border-gray-400 rounded-md pl-2 pr-2" onClick={handleRestartAnimation}>Restart</button>
             </section>
 
             <canvas

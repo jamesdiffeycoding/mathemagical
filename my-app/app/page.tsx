@@ -13,7 +13,7 @@ export default function Home() {
     // OUTER CONTAINER >> CONTENT CONTAINER >> CONTENT
     <section className={`flex-1 pattern-${colour}-500 pattern-paper pattern-bg-white pattern-size-6 pattern-opacity-100 flex flex-col`}>
       <section className={`flex-1 w-full flex items-center justify-center`}>
-        <section className={`w-5/6 max-w-[450px] border-${colour}-600 border-4 rounded-xl bg-gray-300` /* bg-gray-300 is in case the colour theme class doesn't compile */}>
+        <section className={`w-5/6 max-w-[450px] border-${colour}-600 border-4 rounded-xl bg-gray-400` /* bg-gray-400 is in case the colour theme class doesn't compile */}>
           {/* TOP --- MIDDLE --- BOTTOM BOXES */}
           <section className={`bg-${colour}-300 text-black rounded-lg min-h-[185px] flex flex-col justify-between rounded-b-none w-full text-center`}>
             {/* ____ TOP */}
@@ -29,22 +29,32 @@ export default function Home() {
             {/* ____ BOTTOM */}
             <section className={`text-left bg-white opacity-75 border-t-4 border-${colour}-500 text-black rounded-lg text-xs p-3`}>
               <Link href="/calculapp" legacyBehavior>
-                <section className={`p-2 bg-${colour}-300 cursor-pointer hover:bg-gray-300 rounded-md`}>
+                <section className={`p-2 bg-${colour}-300 cursor-pointer hover:bg-gray-400 rounded-md`}>
                   <h1 className="text-bold text-[20px] text-center">
                     <a href="/calculapp">Calculapp</a>
                   </h1>
                   <br></br>
-                  <p className="text-sm">Calculapp is a fully-tested, key-board friendly calculator with input history and clearing options.</p>
+                  <p className="text-sm">Calculapp is a tested, decimal-compatible and keyboard friendly calculator with input history and clearing options.</p>
                 </section>
               </Link>
               <br></br>
               <Link href="/spiraliser" legacyBehavior>
-                <section className={`p-2 bg-${colour}-300 cursor-pointer hover:bg-gray-300 rounded-md`}>
+                <section className={`p-2 bg-${colour}-300 cursor-pointer hover:bg-gray-400 rounded-md`}>
                   <h1 className="text-bold text-[20px] text-center">
                     <a href="/spiraliser">Spiraliser</a>
                   </h1>
                   <br></br>
                   <p className="text-sm">Spiraliser displays an animated spiral created using HTML's canvas element.</p>
+                </section>
+              </Link>
+              <br></br>
+              <Link href="/create" legacyBehavior>
+                <section className={`p-2 bg-${colour}-300 cursor-pointer hover:bg-gray-400 rounded-md`}>
+                  <h1 className="text-bold text-[20px] text-center">
+                    <a href="/spiraliser">Create</a>
+                  </h1>
+                  <br></br>
+                  <p className="text-sm">Create your own trigonometric graph with this easy-to-use animation editor.</p>
                 </section>
               </Link>
 

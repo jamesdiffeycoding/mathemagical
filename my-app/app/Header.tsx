@@ -14,7 +14,7 @@ export default function Header() {
     const { colour, changeColour } = useColourContext();
     const [legacyButtonsNeeded, setLegacyButtonsNeeded] = useState(false)
     function updateUrl() {
-        if (window.location.href.split('/').pop() == "spiraliser") {
+        if (window.location.href.split('/').pop() == "spiraliser" || window.location.href.split('/').pop() == "create") {
             setLegacyButtonsNeeded(true)
         } else {
             setLegacyButtonsNeeded(false)
@@ -26,7 +26,7 @@ export default function Header() {
 
 
     // {window.location.href.split('/').pop()}
-    const buttonClasses = "bg-black p-2 rounded-md hover:bg-gray-500 text-white"
+    const buttonClasses = "bg-black p-2 rounded-md hover:bg-gray-400 text-white"
     return (
         <section className={`bg-${colour}-500 flex gap-5 w-full justify-center p-2 z-10`} onClick={updateUrl}>
             {legacyButtonsNeeded ?
@@ -34,6 +34,8 @@ export default function Header() {
                     <a href="/" className={buttonClasses}>Home</a>
                     <a href="/calculapp" className={buttonClasses}>Calculapp</a>
                     <a href="/spiraliser" className={buttonClasses}>Spiraliser</a>
+                    <a href="/create" className={buttonClasses}>Create</a>
+
                 </>
                 ) : (<>
                     <Link href="/" legacyBehavior>
@@ -44,6 +46,9 @@ export default function Header() {
                     </Link>
                     <Link href="/spiraliser" legacyBehavior>
                         <a href="/" className={buttonClasses}>Spiraliser</a>
+                    </Link>
+                    <Link href="/create" legacyBehavior>
+                        <a href="/" className={buttonClasses}>Create</a>
                     </Link>
                 </>
                 )
