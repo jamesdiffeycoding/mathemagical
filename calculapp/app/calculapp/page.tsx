@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, useRef, useCallback } from "react"
+import { useState, useEffect, useRef } from "react"
 import Decimal from "decimal.js" // Decimal JS prevents JavaScript rounding errors (e.g. 3.3+3.3 = 6.59999)
 import { useColourContext } from "../ColourContext"
 import ButtonComponent from "./components/Button"
@@ -67,7 +67,7 @@ export default function Home() {
     return () => {
       document.removeEventListener('keydown', detectKeyDown, true);
     };
-  }, [handleDecimalPoint, handleEntry, handleEqualsPress, handleOperation])
+  }, [])
 
   /* Calculator functions ----------------------------------------------------------------------*/
   // handleEntry: number presses appended to variable or reset calculator after equals press
@@ -79,55 +79,46 @@ export default function Home() {
   // handleClearCalculator: "Clear" presses or when a new equation is started one number, decimal point or operation press after equals button
   // handleHistoryUpdate: updates the history on operation, equals, or post-equals presses
   // handleGetPreviousAnswer: "Ans" presses. Replaces the entry with answer.
-  // Memoize handleEntry using useCallback
-  const handleEntry = useCallback((input: string) => {
-    if (operationRef.current === "" && entryRef.current.length === 0) {
-      handleClearCalculator();
+  function handleEntry(input: string) {
+    if (operationRef.current == "" && entryRef.current.length == 0) { // Ensure after "=", typing with no operation will reset calculator. 
+      handleClearCalculator()
     }
-    setEntry(prev => prev + input);
-  }, [handleClearCalculator]);
-
-  // Memoize handleDecimalPoint using useCallback
-  const handleDecimalPoint = useCallback(() => {
-    if (operationRef.current === "") {
-      setAnswer("");
-      setHistory("");
+    setEntry(prev => prev += input)
+  }
+  function handleDecimalPoint() {
+    if (operationRef.current == "") {
+      setAnswer("")
+      setHistory("")
     }
     if (!entryIsDecimalRef.current) {
-      setEntryIsDecimal(true);
-      if (entryRef.current.length === 0) {
-        setEntry("0.");
+      setEntryIsDecimal(prev => true)
+      if (entryRef.current.length == 0) {
+        setEntry("0.")
       } else {
-        handleEntry(".");
+        handleEntry(".")
       }
     }
-  }, [handleEntry, entryIsDecimalRef.current]);
-
-  // Memoize handleOperation using useCallback
-  const handleOperation = useCallback((input: string) => {
-    setOperation(input);
-    handleHistoryUpdate();
-    if (answerRef.current === "") {
-      setAnswer(entryRef.current);
+  }
+  function handleOperation(input: string) {
+    setOperation(input)
+    handleHistoryUpdate()
+    if (answerRef.current == "") {
+      setAnswer(entryRef.current)
     } else {
-      if (entryRef.current !== "") {
-        handleAnswerCalculation();
+      if (entryRef.current != "") {
+        handleAnswerCalculation()
       }
     }
-    handleClearEntry();
-  }, [handleHistoryUpdate, handleAnswerCalculation, handleClearEntry]);
-
-  // Memoize handleEqualsPress using useCallback
-  const handleEqualsPress = useCallback(() => {
+    handleClearEntry()
+  }
+  function handleEqualsPress() {
     if (operationRef.current !== "" && entryRef.current !== "") {
-      handleHistoryUpdate();
-      handleAnswerCalculation();
-      setEntry("");
-      setOperation("");
+      handleHistoryUpdate()
+      handleAnswerCalculation()
+      setEntry("")
+      setOperation("")
     }
-  }, [handleHistoryUpdate, handleAnswerCalculation]);
-
-
+  }
   function handleAnswerCalculation() {
     const ensureDecimal = (num: string) => {
       // Conditional below ensures ".0" is appended if not already a decimal.

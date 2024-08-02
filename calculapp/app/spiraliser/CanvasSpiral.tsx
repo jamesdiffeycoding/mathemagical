@@ -1,5 +1,5 @@
 // IMPORTS -------------------------------------------------------------------------------------------------------- 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { coloursArray } from './rainbowRGBvalues';
 import Link from 'next/link';
 
@@ -8,15 +8,12 @@ export default function CanvasSpiral() {
     // THETA
     const [theta, setTheta] = useState(0.4);
     const [thetaIncrement, setThetaIncrement] = useState(0.001);
-    // Memoize handleTheta using useCallback
-    const handleTheta = useCallback(() => {
-        setTheta(prev => prev + thetaIncrement);
-    }, [thetaIncrement]); // Dependency on thetaIncrement
-
-    // Memoize handleThetaIncrement using useCallback
-    const handleThetaIncrement = useCallback((newIncrement: number) => {
+    function handleTheta() {
+        setTheta(prev => prev + thetaIncrement)
+    }
+    function handleThetaIncrement(newIncrement: number) {
         setThetaIncrement(newIncrement);
-    }, []); // Empty dependency array since no external dependencies
+    }
 
     const canvasRef = useRef(null)
 
