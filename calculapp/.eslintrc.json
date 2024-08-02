@@ -1,8 +1,8 @@
 {
-  "extends": "eslint:recommended",
+  "extends": "next/core-web-vitals",
   "rules": {
     "no-unused-vars": "off",
-    "no-console": "off"
+    "no-console": "off",
     // Add other rules to turn off here
   }
 }
