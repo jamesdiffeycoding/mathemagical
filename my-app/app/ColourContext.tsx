@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 // Colours array
-const colours = ["lime", "indigo", "orange", "pink"];
+const colours = ["green", "indigo", "orange", "pink"];
 
 // Create a context with default values
 const ColourContext = createContext({
