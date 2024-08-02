@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('addition', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/calculapp');
   // Case: addition
   await page.keyboard.press('4')
   await page.keyboard.press('.')
@@ -24,7 +24,7 @@ test('addition', async ({ page }) => {
 
 
 test('subtraction', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/calculapp');
   // Case: minus test with multiple decimals and negative answer
   await page.keyboard.press('4');
   await page.keyboard.press('.');
@@ -46,7 +46,7 @@ test('subtraction', async ({ page }) => {
 });
 
 test('multiplication with "*"', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/calculapp');
   // Case: multiplication test with multiple decimals and negative answer
   await page.click('button:has-text("4")');
   await page.keyboard.press('.');
@@ -67,7 +67,7 @@ test('multiplication with "*"', async ({ page }) => {
 });
 
 test('multiplication with "x"', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/calculapp');
   // Case: multiplication test with multiple decimals and negative answer
   await page.click('button:has-text("4")');
   await page.click('button:has-text(".")');
@@ -88,7 +88,7 @@ test('multiplication with "x"', async ({ page }) => {
 });
 
 test('Combination of key press and on-screen "×"', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/calculapp');
   // Case: multiplication test with multiple decimals and negative answer
   await page.keyboard.press('4');
   await page.keyboard.press('.');
@@ -108,7 +108,7 @@ test('Combination of key press and on-screen "×"', async ({ page }) => {
   expect(history).toBe('4.2 × 3 - 1.3')
 });
 test('division with /', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/calculapp');
   // Case: simple division test with multiple decimals and negative answer
   await page.keyboard.press('4');
   await page.keyboard.press('2');
@@ -145,7 +145,7 @@ test('division with /', async ({ page }) => {
   expect(history).toBe('4242 ÷ 221.1 ÷ 3')
 });
 test('Combination of key press and on-screen "÷"', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/calculapp');
   // Case: simple division test with multiple decimals and negative answer
   await page.keyboard.press('4');
   await page.keyboard.press('2');
@@ -187,7 +187,7 @@ test('Combination of key press and on-screen "÷"', async ({ page }) => {
 
 
 test('decimal places', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/calculapp');
   let text = await page.textContent('#answer');
   // Case: entering a single decimal
   await page.keyboard.press('Escape');
@@ -254,7 +254,7 @@ test('decimal places', async ({ page }) => {
 });
 
 test('double "=" press does not clear answer', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/calculapp');
   await page.click('button:has-text("3")');
   await page.click('button:has-text("+")');
   await page.click('button:has-text("4")');
@@ -268,7 +268,7 @@ test('double "=" press does not clear answer', async ({ page }) => {
 })
 
 test('"=" -> ".", "Ans" or a number clears answer', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/calculapp');
   // Case: = followed by "."
   await page.keyboard.press('3');
   await page.keyboard.press('+');
@@ -295,7 +295,7 @@ test('"=" -> ".", "Ans" or a number clears answer', async ({ page }) => {
 })
 
 test('"=" -> new operation does not recent answer to 0', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/calculapp');
   await page.keyboard.press('3');
   await page.keyboard.press('+');
   await page.keyboard.press('4');
@@ -311,7 +311,7 @@ test('"=" -> new operation does not recent answer to 0', async ({ page }) => {
 })
 
 test('"Ans"', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/calculapp');
   // Case: 3 + 4 - Ans = "0"
   await page.keyboard.press('3');
   await page.keyboard.press('+');
@@ -339,7 +339,7 @@ test('"Ans"', async ({ page }) => {
 
 
 test('swapping to addition/subtraction from division/multiplication is handled correctly', async ({ page }) => {
-  await page.goto('http://localhost:3000/');
+  await page.goto('http://localhost:3000/calculapp');
 
   // Case 1: multiplication and division, then subtraction
   await page.click('button:has-text("3")');
