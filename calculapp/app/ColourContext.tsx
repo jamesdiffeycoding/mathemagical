@@ -17,15 +17,21 @@ interface ColourProviderProps {
 
 export function ColourProvider({ children }: ColourProviderProps) {
     const [colourIndex, setColourIndex] = useState<number>(() => {
-        // Retrieve the saved color index from local storage or default to 1
-        const savedIndex = localStorage.getItem('colourIndex');
-        return savedIndex ? parseInt(savedIndex) : 1;
+        // Only access localStorage on the client side
+        if (typeof window !== 'undefined') {
+            const savedIndex = localStorage.getItem('colourIndex');
+            return savedIndex ? parseInt(savedIndex) : 1;
+        }
+        return 1; // Default to index 1 if not in the browser
     });
     const [colour, setColour] = useState(colours[colourIndex]);
 
     useEffect(() => {
-        setColour(colours[colourIndex]);
-        localStorage.setItem('colourIndex', colourIndex.toString());
+        // Access localStorage only on the client side
+        if (typeof window !== 'undefined') {
+            setColour(colours[colourIndex]);
+            localStorage.setItem('colourIndex', colourIndex.toString());
+        }
     }, [colourIndex]);
 
     const changeColour = () => {
