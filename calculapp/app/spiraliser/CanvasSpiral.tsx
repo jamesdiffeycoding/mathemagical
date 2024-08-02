@@ -42,8 +42,8 @@ export default function CanvasSpiral() {
         let animationFrameId: number;
         function drawNextFrame() {
             // ⭐ UNIQUE EQUATIONS
-            const x = centerX + 50 * (Math.cos(theta) + Math.cos(Math.PI * theta))
-            const y = centerY + 50 * (Math.sin(theta) + Math.sin(Math.PI * theta))
+            const x = centerX + 80 * (Math.cos(theta) + Math.cos(Math.PI * theta))
+            const y = centerY + 80 * (Math.sin(theta) + Math.sin(Math.PI * theta))
             // INCREMENT THETA VALUE
             handleTheta()
 
@@ -74,6 +74,10 @@ export default function CanvasSpiral() {
     }, [colorCount, colorIndex, rainbowMode, theta, thetaIncrement, graphColor, handleTheta, handleThetaIncrement]);
 
 
+    const buttonValues = [
+        0.000001, 0.00005, 0.0004,
+        0.0011, 0.004
+    ];
 
 
     function resetColourToWhite() {
@@ -103,16 +107,36 @@ export default function CanvasSpiral() {
     }
 
     return (
-        <canvas
-            ref={canvasRef}
-            className="graph-canvas border-4 border-white"
-            width="350px"
-            height="350px"
-            style={{
-                backgroundColor: "black",
-                pointerEvents: "none"
-            }}
-        >
-        </canvas>
+        <>
+            <section className="flex gap-2 p-1">
+                <span>Speed: </span>
+                {buttonValues.map((value, index) => (
+                    <button
+                        key={index}
+                        className="bg-white hover:bg-gray-300 gap-300 border-2 border-gray-300 rounded-md pl-2 pr-2"
+                        onClick={() => handleThetaIncrement(value)}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
+            </section>
+            <section className="flex gap-2 p-1">
+                <input type="color" onChange={(event) => handleColourChange((event.currentTarget as HTMLInputElement).value)} />
+                <button className="bg-white hover:bg-gray-300 gap-300 border-2 border-gray-300 rounded-md pl-2 pr-2" onClick={() => toggleRainbowMode()}>{rainbowMode ? ("Rainbow off") : ("Rainbow on")}</button>
+                <button className="bg-white hover:bg-gray-300 gap-300 border-2 border-gray-300 rounded-md pl-2 pr-2" onClick={handleRestartAnimation}>Restart</button>
+            </section>
+
+            <canvas
+                ref={canvasRef}
+                className="graph-canvas border-4 border-white"
+                width="350px"
+                height="350px"
+                style={{
+                    backgroundColor: "black",
+                    pointerEvents: "none"
+                }}
+            >
+            </canvas>
+        </>
     );
 }

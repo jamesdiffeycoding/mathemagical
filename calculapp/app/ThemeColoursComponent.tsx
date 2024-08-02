@@ -8,6 +8,7 @@ export default function ThemeColoursComponent() {
     {/* THE BELOW SECTION ENSURES TAILWIND STYLES FOR ALL COLOUR THEMES LOAD, SINCE THEY ARE INCLUDED IN THE BUNDLE AT COMPILE TIME */ }
     return (
         <section className="hidden">
+            <div className="bg-gray-300"></div>
             <div className="bg-lime-300"></div>
             <div className="bg-indigo-300"></div>
             <div className="bg-orange-300"></div>
