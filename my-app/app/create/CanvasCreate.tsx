@@ -10,7 +10,7 @@ export default function CanvasCreate() {
 
     // THETA
     const [theta, setTheta] = useState(0.4);
-    const [thetaIncrement, setThetaIncrement] = useState(0.002);
+    const [thetaIncrement, setThetaIncrement] = useState(0.0008);
     function handleTheta() {
         setTheta(prev => prev + thetaIncrement)
     }
