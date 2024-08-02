@@ -1,5 +1,4 @@
 "use client"
-import useColour from "../hooks/useColour"
 import CanvasSpiral from "./components/CanvasSpiral"
 import { useColourContext } from "../ColourContext";
 
