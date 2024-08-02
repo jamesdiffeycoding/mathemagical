@@ -71,7 +71,7 @@ export default function CanvasSpiral() {
         return () => {
             cancelAnimationFrame(animationFrameId);
         };
-    }, [colorCount, colorIndex, rainbowMode, theta, thetaIncrement, graphColor]);
+    }, [colorCount, colorIndex, rainbowMode, theta, thetaIncrement, graphColor, handleTheta, handleThetaIncrement]);
 
 
 

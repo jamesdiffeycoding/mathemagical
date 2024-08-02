@@ -1,5 +1,5 @@
 "use client"
-import CanvasSpiral from "./components/CanvasSpiral"
+import CanvasSpiral from "./CanvasSpiral"
 import { useColourContext } from "../ColourContext";
 
 // ---- solar power button?
