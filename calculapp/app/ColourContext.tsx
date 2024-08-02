@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
@@ -16,22 +16,11 @@ interface ColourProviderProps {
 }
 
 export function ColourProvider({ children }: ColourProviderProps) {
-    const [colourIndex, setColourIndex] = useState<number>(() => {
-        // Only access localStorage on the client side
-        if (typeof window !== 'undefined') {
-            const savedIndex = localStorage.getItem('colourIndex');
-            return savedIndex ? parseInt(savedIndex) : 1;
-        }
-        return 1; // Default to index 1 if not in the browser
-    });
+    const [colourIndex, setColourIndex] = useState(1);
     const [colour, setColour] = useState(colours[colourIndex]);
 
     useEffect(() => {
-        // Access localStorage only on the client side
-        if (typeof window !== 'undefined') {
-            setColour(colours[colourIndex]);
-            localStorage.setItem('colourIndex', colourIndex.toString());
-        }
+        setColour(colours[colourIndex]);
     }, [colourIndex]);
 
     const changeColour = () => {
