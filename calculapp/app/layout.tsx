@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <link rel="icon" href="/favicon.ico" />
-      <body className="h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col">
         <ColourProvider>
           <Header />
           {children}

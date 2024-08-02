@@ -11,7 +11,7 @@ export default function Home() {
 
   return (
     // OUTER CONTAINER >> CONTENT CONTAINER >> CONTENT
-    <section className={`h-screen pattern-${colour}-500 pattern-paper pattern-bg-white pattern-size-6 pattern-opacity-100 flex flex-col`}>
+    <section className={`min-h-screen pattern-${colour}-500 pattern-paper pattern-bg-white pattern-size-6 pattern-opacity-100 flex flex-col`}>
       <section className={`flex-1 w-full flex items-center justify-center`}>
         <section className={`w-5/6 max-w-[450px] border-${colour}-600 border-4 rounded-xl bg-gray-300` /* bg-gray-300 is in case the colour theme class doesn't compile */}>
           {/* TOP --- MIDDLE --- BOTTOM BOXES */}
