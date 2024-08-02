@@ -1,5 +1,5 @@
 // IMPORTS -------------------------------------------------------------------------------------------------------- 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { coloursArray } from './rainbowRGBvalues';
 import Link from 'next/link';
 
@@ -71,7 +71,7 @@ export default function CanvasSpiral() {
         return () => {
             cancelAnimationFrame(animationFrameId);
         };
-    }, [colorCount, colorIndex, rainbowMode, theta, thetaIncrement, graphColor, handleTheta, handleThetaIncrement]);
+    }, [colorCount, colorIndex, rainbowMode, theta, thetaIncrement, graphColor]);
 
 
     const buttonValues = [

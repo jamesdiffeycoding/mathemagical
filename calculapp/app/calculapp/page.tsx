@@ -67,7 +67,7 @@ export default function Home() {
     return () => {
       document.removeEventListener('keydown', detectKeyDown, true);
     };
-  }, [handleDecimalPoint, handleEntry, handleEqualsPress, handleOperation])
+  }, [])
 
   /* Calculator functions ----------------------------------------------------------------------*/
   // handleEntry: number presses appended to variable or reset calculator after equals press
