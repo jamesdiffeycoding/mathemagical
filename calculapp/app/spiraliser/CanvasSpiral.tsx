@@ -8,12 +8,15 @@ export default function CanvasSpiral() {
     // THETA
     const [theta, setTheta] = useState(0.4);
     const [thetaIncrement, setThetaIncrement] = useState(0.001);
-    function handleTheta() {
-        setTheta(prev => prev + thetaIncrement)
-    }
-    function handleThetaIncrement(newIncrement: number) {
+    // Memoize handleTheta using useCallback
+    const handleTheta = useCallback(() => {
+        setTheta(prev => prev + thetaIncrement);
+    }, [thetaIncrement]); // Dependency on thetaIncrement
+
+    // Memoize handleThetaIncrement using useCallback
+    const handleThetaIncrement = useCallback((newIncrement: number) => {
         setThetaIncrement(newIncrement);
-    }
+    }, []); // Empty dependency array since no external dependencies
 
     const canvasRef = useRef(null)
 
@@ -71,7 +74,7 @@ export default function CanvasSpiral() {
         return () => {
             cancelAnimationFrame(animationFrameId);
         };
-    }, [colorCount, colorIndex, rainbowMode, theta, thetaIncrement, graphColor]);
+    }, [colorCount, colorIndex, rainbowMode, theta, thetaIncrement, graphColor, handleTheta, handleThetaIncrement]);
 
 
     const buttonValues = [
