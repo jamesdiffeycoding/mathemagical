@@ -57,6 +57,17 @@ export default function Home() {
                   <p className="text-sm">Create your own trigonometric graph with this easy-to-use animation editor.</p>
                 </section>
               </Link>
+              <br></br>
+              <Link href="/blog" legacyBehavior>
+                <section className={`p-2 bg-yellow-300 cursor-pointer hover:bg-gray-400 rounded-md`}>
+                  <h1 className="text-bold text-[20px] text-center">
+                    <a href="/spiraliser">Blog</a>
+                  </h1>
+                  <br></br>
+                  <p className="text-sm">A record of learnings, decision decisions and bug-fixes related to these projects.</p>
+                </section>
+              </Link>
+
 
             </section>
           </section>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/app/Header";
+import Header from "@/app/components/Header";
 import ThemeColoursComponent from "./ThemeColoursComponent";
 import { ColourProvider } from "./ColourContext";
 export const metadata: Metadata = {
