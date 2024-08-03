@@ -27,7 +27,7 @@ export default function Header() {
         }
     }
 
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [windowWidth, setWindowWidth] = useState(700);
 
     useEffect(() => {
         const handleResize = () => {

@@ -17,7 +17,7 @@ export default function ATagLinks() {
 
 
 
-    const buttonClasses = "bg-black p-2 rounded-md hover:bg-gray-400 text-white";
+    const buttonClasses = `bg-${colour}-500 p-2 rounded-md hover:bg-${colour}-300 text-white`;
 
     return (
         <>
