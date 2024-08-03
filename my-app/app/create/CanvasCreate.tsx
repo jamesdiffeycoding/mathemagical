@@ -206,20 +206,20 @@ export default function CanvasCreate() {
                     <button className={`bg-${colour}-500 text-white ml-1 mr-1 hover:bg-gray-400 w-5 border-1 border-gray-400 rounded-md pl-1 pr-1`} onClick={() => handleCoefficientTweak("x1", "increase")}>+</button>
                 </span>
                 sin(θ)
-                {x2Mod >= 0 ? ' + ' : ' - '}
                 <span className={`text-${colour}-700 font-bold`}>
                     <button className={`bg-${colour}-500 text-white ml-1 mr-1 hover:bg-gray-400 w-5 border-1 border-gray-400 rounded-md pl-1 pr-1`} onClick={() => handleCoefficientTweak("x2", "decrease")}>-</button>
+                    {x2Mod >= 0 ? '+' : '-'}
                     {Math.abs(x2Mod).toFixed(1)}
                     <button className={`bg-${colour}-500 text-white ml-1 mr-1 hover:bg-gray-400 w-5 border-1 border-gray-400 rounded-md pl-1 pr-1`} onClick={() => handleCoefficientTweak("x2", "increase")}>+</button>
                 </span>
                 cos(θ)
-                {x3Mod >= 0 ? ' + ' : ' - '}
                 <span className={`text-${colour}-700 font-bold`}>
                     <button className={`bg-${colour}-500 text-white ml-1 mr-1 hover:bg-gray-400 w-5 border-1 border-gray-400 rounded-md pl-1 pr-1`} onClick={() => handleCoefficientTweak("x3", "decrease")}>-</button>
+                    {x3Mod >= 0 ? '+' : '-'}
                     {Math.abs(x3Mod).toFixed(1)}
                     <button className={`bg-${colour}-500 text-white ml-1 mr-1 hover:bg-gray-400 w-5 border-1 border-gray-400 rounded-md pl-1 pr-1`} onClick={() => handleCoefficientTweak("x3", "increase")}>+</button>
                 </span>
-                sin(π * θ)
+                sin(πθ)
             </section>
             {/* Y- */}
 
@@ -232,20 +232,20 @@ export default function CanvasCreate() {
                         <button className={`bg-${colour}-500 text-white ml-1 mr-1 hover:bg-gray-400 w-5 border-1 border-gray-400 rounded-md pl-1 pr-1`} onClick={() => handleCoefficientTweak("y1", "increase")}>+</button>
                     </span>
                     sin(θ)
-                    {y2Mod >= 0 ? ' + ' : ' - '}
                     <span className={`text-${colour}-700 font-bold`}>
                         <button className={`bg-${colour}-500 text-white ml-1 mr-1 hover:bg-gray-400 w-5 border-1 border-gray-400 rounded-md pl-1 pr-1`} onClick={() => handleCoefficientTweak("y2", "decrease")}>-</button>
+                        {y2Mod >= 0 ? '+' : '-'}
                         {Math.abs(y2Mod).toFixed(1)}
                         <button className={`bg-${colour}-500 text-white ml-1 mr-1 hover:bg-gray-400 w-5 border-1 border-gray-400 rounded-md pl-1 pr-1`} onClick={() => handleCoefficientTweak("y2", "increase")}>+</button>
                     </span>
                     cos(θ)
-                    {y3Mod >= 0 ? ' + ' : ' - '}
                     <span className={`text-${colour}-700 font-bold`}>
                         <button className={`bg-${colour}-500 text-white ml-1 mr-1 hover:bg-gray-400 w-5 border-1 border-gray-400 rounded-md pl-1 pr-1`} onClick={() => handleCoefficientTweak("y3", "decrease")}>-</button>
+                        {y3Mod >= 0 ? '+' : '-'}
                         {Math.abs(y3Mod).toFixed(1)}
                         <button className={`bg-${colour}-500 text-white ml-1 mr-1 hover:bg-gray-400 w-5 border-1 border-gray-400 rounded-md pl-1 pr-1`} onClick={() => handleCoefficientTweak("y3", "increase")}>+</button>
                     </span>
-                    cos(π * θ)
+                    cos(πθ)
                 </p>
             </section>
             <div className="p-2">
@@ -263,16 +263,16 @@ export default function CanvasCreate() {
                 }}
             >
             </canvas>
-            <div className="grid grid-cols-3 text-left">
+            <div className="grid grid-cols-3 text-left gap-5">
                 <div>
                     Theta: {(theta).toFixed(0)}
                 </div>
                 <div>
-                    x: {(x - 175).toFixed(0)}
+                    x: {(x - 175).toFixed(0).padStart(3, '0')}
 
                 </div>
                 <div>
-                    y = {(y - 175).toFixed(0)}
+                    y = {(175 - y).toFixed(0).padStart(3, '0')}
                 </div>
 
             </div>
