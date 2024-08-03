@@ -31,9 +31,6 @@ export default function Spiraliser() {
                         {/* ____ BOTTOM */}
                         <section className={`text-left bg-white opacity-75 border-t-4 border-${colour}-500 text-black rounded-lg text-xs p-3`}>
                             <p className="">Create your own animated equations my manipulating the equations above. X and Y values on this canvas are painted according to their coefficients for constantly increasing values of θ.  </p>
-                            <br></br>
-                            <p className="">Don't be surprised if using tan() makes your animation funky!  </p>
-
                         </section>
                     </section>
                     {/* END OF BOXES */}
