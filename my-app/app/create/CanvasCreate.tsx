@@ -102,8 +102,8 @@ export default function CanvasCreate() {
         // DRAW NEXT FRAME FUNCTION
         let animationFrameId: number;
         function drawNextFrame() {
-            const realPart = x1Mod * (Math.sin(theta)) + x2Mod * (Math.cos(theta)) + x3Mod * (Math.tan(theta))
-            const imagPart = y1Mod * (Math.sin(theta)) + y2Mod * (Math.cos(theta)) + y3Mod * (Math.tan(theta))
+            const realPart = x1Mod * (Math.sin(theta)) + x2Mod * (Math.cos(theta)) + x3Mod * (Math.sin(Math.PI * theta))
+            const imagPart = y1Mod * (Math.sin(theta)) + y2Mod * (Math.cos(theta)) + y3Mod * (Math.cos(Math.PI * theta))
             setX(centerX + realPart * 80)
             setY(centerY + imagPart * 80)
 
@@ -219,7 +219,7 @@ export default function CanvasCreate() {
                     {Math.abs(x3Mod).toFixed(1)}
                     <button className={`bg-${colour}-500 text-white ml-1 mr-1 hover:bg-gray-400 w-5 border-1 border-gray-400 rounded-md pl-1 pr-1`} onClick={() => handleCoefficientTweak("x3", "increase")}>+</button>
                 </span>
-                tan(θ)
+                sin(π * θ)
             </section>
             {/* Y- */}
 
@@ -245,7 +245,7 @@ export default function CanvasCreate() {
                         {Math.abs(y3Mod).toFixed(1)}
                         <button className={`bg-${colour}-500 text-white ml-1 mr-1 hover:bg-gray-400 w-5 border-1 border-gray-400 rounded-md pl-1 pr-1`} onClick={() => handleCoefficientTweak("y3", "increase")}>+</button>
                     </span>
-                    tan(θ)
+                    cos(π * θ)
                 </p>
             </section>
             <div className="p-2">
