@@ -28,11 +28,11 @@ export default function CanvasCreate() {
     const [colorCount, setColorCount] = useState(0);
 
     const [x1Mod, setX1Mod] = useState(1)
-    const [x2Mod, setX2Mod] = useState(0)
-    const [x3Mod, setX3Mod] = useState(0)
+    const [x2Mod, setX2Mod] = useState(1)
+    const [x3Mod, setX3Mod] = useState(1)
     const [y1Mod, setY1Mod] = useState(1)
-    const [y2Mod, setY2Mod] = useState(0)
-    const [y3Mod, setY3Mod] = useState(0)
+    const [y2Mod, setY2Mod] = useState(1)
+    const [y3Mod, setY3Mod] = useState(1)
 
     function tweakParameterByPointTwo(value: number, direction: string) {
         if (direction == "increase") {
@@ -104,8 +104,8 @@ export default function CanvasCreate() {
         function drawNextFrame() {
             const realPart = x1Mod * (Math.sin(theta)) + x2Mod * (Math.cos(theta)) + x3Mod * (Math.sin(Math.PI * theta))
             const imagPart = y1Mod * (Math.sin(theta)) + y2Mod * (Math.cos(theta)) + y3Mod * (Math.cos(Math.PI * theta))
-            setX(centerX + realPart * 80)
-            setY(centerY + imagPart * 80)
+            setX(centerX + realPart * 50)
+            setY(centerY + imagPart * 50)
 
             // INCREMENT THETA VALUE
             handleTheta()
