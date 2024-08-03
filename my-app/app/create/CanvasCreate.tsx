@@ -30,9 +30,9 @@ export default function CanvasCreate() {
     const [x1Mod, setX1Mod] = useState(1)
     const [x2Mod, setX2Mod] = useState(1)
     const [x3Mod, setX3Mod] = useState(1)
-    const [y1Mod, setY1Mod] = useState(1)
-    const [y2Mod, setY2Mod] = useState(1)
-    const [y3Mod, setY3Mod] = useState(1)
+    const [y1Mod, setY1Mod] = useState(-1)
+    const [y2Mod, setY2Mod] = useState(-1)
+    const [y3Mod, setY3Mod] = useState(-1)
 
     function tweakParameterByPointTwo(value: number, direction: string) {
         if (direction == "increase") {
@@ -263,7 +263,19 @@ export default function CanvasCreate() {
                 }}
             >
             </canvas>
-            <p> Theta: {(theta).toFixed(0)}, x: {(x - 175).toFixed(0)}, y = {(y - 175).toFixed(0)} </p>
+            <div className="grid grid-cols-3 text-left">
+                <div>
+                    Theta: {(theta).toFixed(0)}
+                </div>
+                <div>
+                    x: {(x - 175).toFixed(0)}
+
+                </div>
+                <div>
+                    y = {(y - 175).toFixed(0)}
+                </div>
+
+            </div>
         </>
     );
 }
