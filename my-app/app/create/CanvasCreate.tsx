@@ -263,7 +263,7 @@ export default function CanvasCreate() {
                 }}
             >
             </canvas>
-            <div className="grid grid-cols-3 text-left gap-5">
+            <div className="grid grid-cols-3 text-center gap-5 p-2">
                 <div>
                     Theta: {(theta).toFixed(0)}
                 </div>
@@ -274,7 +274,6 @@ export default function CanvasCreate() {
                 <div>
                     y = {(175 - y).toFixed(0).padStart(3, '0')}
                 </div>
-
             </div>
         </>
     );

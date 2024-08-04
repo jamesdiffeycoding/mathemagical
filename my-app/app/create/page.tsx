@@ -15,7 +15,7 @@ export default function Spiraliser() {
         // OUTER CONTAINER >> CONTENT CONTAINER >> CONTENT
         <section className={`flex-1 pattern-${colour}-500 pattern-paper pattern-bg-white pattern-size-6 pattern-opacity-100 flex flex-col`}>
             <section className={`flex-1 w-full flex items-center justify-center`}>
-                <section className={`w-5/6 max-w-[450px] border-${colour}-600 border-4 rounded-xl text-[25px] bg-gray-400` /* bg-gray-400 is in case the colour theme class doesn't compile */}>
+                <section className={`w-5/6 mt-2 max-w-[450px] border-${colour}-600 border-4 rounded-xl text-[25px] bg-gray-400` /* bg-gray-400 is in case the colour theme class doesn't compile */}>
                     {/* TOP --- MIDDLE --- BOTTOM BOXES */}
                     <section className={`bg-${colour}-300 text-black rounded-lg min-h-[185px] flex flex-col justify-between rounded-b-none w-full text-center`}>
                         {/* ____ TOP */}
