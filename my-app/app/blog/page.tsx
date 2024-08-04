@@ -74,6 +74,7 @@ export default function Blog() {
                                     </h1>
                                     <br></br>
                                     <p className="">Here are some lessons and reflections from putting this site together:</p>
+                                    <br></br>
                                     <ol className="list-decimal list-inside ml-4">
                                         <li className="mb-2">Tailwind bundles only used class names at compile time for efficiency. In order to use classes (e.g. colours from different themes), you need to ensure those colours are included in the <strong> compilation bundle</strong>. </li>
                                         <li className="mb-2"><strong>Local storage</strong> would be useful for storing the preferred colour theme in the absence of {"<Link> compatability with the canvas element."}. I can add this later. </li>
